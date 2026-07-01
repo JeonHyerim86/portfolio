@@ -12,7 +12,6 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="전혜림 · 백엔드 개발자 포트폴리오" />
   <meta property="og:description" content="서비스의 겉보다 속을, 더 좋은 서비스를 위해 고민하는 백엔드 개발자." />
-  <meta property="og:image" content="assets/img/profile-og.jpg" />
   <meta property="og:locale" content="ko_KR" />
   <meta name="theme-color" content="#0b1220" />
 
@@ -36,8 +35,8 @@
       <nav class="primary-nav" id="primaryNav" aria-label="주요 메뉴">
         <ul>
           <li><a href="#home" class="nav-link" data-nav="home">홈</a></li>
-          <li><a href="#portfolio" class="nav-link" data-nav="portfolio">포트폴리오</a></li>
           <li><a href="#about" class="nav-link" data-nav="about">자기소개</a></li>
+          <li><a href="#portfolio" class="nav-link" data-nav="portfolio">포트폴리오</a></li>
           <li><a href="#contact" class="nav-link" data-nav="contact">연락처</a></li>
         </ul>
       </nav>
@@ -65,22 +64,59 @@
             <li>데이터 파이프라인</li>
             <li>Docker / CI·CD</li>
           </ul>
-          <div class="hero-cta reveal">
-            <a href="#portfolio" class="btn btn-primary">포트폴리오 보기</a>
-            <a href="#contact" class="btn btn-ghost">연락하기</a>
-          </div>
-        </div>
-
-        <div class="hero-photo reveal" data-parallax="0.16">
-          <div class="photo-ring">
-            <img src="assets/img/profile.png" alt="전혜림 프로필 캐릭터" width="487" height="760" />
-          </div>
         </div>
       </div>
 
-      <a href="#portfolio" class="scroll-cue" aria-label="아래로 스크롤">
+      <a href="#about" class="scroll-cue" aria-label="아래로 스크롤">
         <span></span>
       </a>
+    </section>
+
+    <!-- ===================== 자기소개 ===================== -->
+    <section id="about" class="section section-alt">
+      <div class="container about-grid">
+        <header class="section-head reveal about-head">
+          <p class="section-kicker">ABOUT</p>
+          <h2 class="section-title">자기소개</h2>
+          <p class="about-intro">
+            Spring Boot 기반의 안정적이고 확장성 있는 백엔드 설계를 지향하며 성능 최적화와 모니터링을 함께 고려합니다.
+            Docker·Git 활용과 문서화로 배포 안정성과 협업 효율을 챙기고, 사회적 문제 해결을 위한 서비스를 직접 기획·구현해 왔습니다.
+            <strong>겉으로 보이는 기능보다 그 안에서 서비스를 단단하게 만드는 것</strong>, 그것이 제가 개발자로서 추구하는 방향입니다.
+          </p>
+        </header>
+
+        <div class="about-block reveal">
+          <h3 class="about-subtitle">핵심 역량</h3>
+          <ul class="competency-list">
+            <li>Spring Boot 기반 서비스의 백엔드 성능 개선·모니터링 경험</li>
+            <li>ERD 설계부터 핵심 서비스 구현까지 백엔드 전반을 주도적으로 개발</li>
+            <li>Swagger·Notion 기반 문서화로 팀 내 협업 효율 향상</li>
+            <li>Java·Python·C·C++ 등 다양한 언어 경험 → 새 기술 스택 습득에 유리</li>
+            <li>AWS·Airflow·Docker 활용 경험 기반 클라우드 지식</li>
+          </ul>
+        </div>
+
+        <div class="about-block reveal">
+          <h3 class="about-subtitle">기술 스택</h3>
+          <ul class="skill-badges">
+            <li>Java</li><li>Spring Boot</li><li>Python</li><li>MySQL</li><li>Git</li><li>RESTful API</li><li>Docker</li>
+          </ul>
+
+          <h3 class="about-subtitle">학력</h3>
+          <p class="about-line"><strong>광운대학교</strong> 컴퓨터정보공학부 정보통신학전공<br />
+          <span class="muted">2020.03 – 2025.02 졸업 · 자료구조, 알고리즘, 운영체제, 컴퓨터 네트워크, 객체지향프로그래밍 등 이수</span></p>
+        </div>
+
+        <div class="about-block reveal about-awards">
+          <h3 class="about-subtitle">수상 · 자격증</h3>
+          <ul class="award-list">
+            <li><span class="award-year">2025.09</span> 제7회 KDT 해커톤 <strong>최우수상</strong></li>
+            <li><span class="award-year">2025.09</span> 정보처리기사</li>
+            <li><span class="award-year">2025.04</span> SQL개발자(SQLD)</li>
+            <li><span class="award-year">2025.11</span> 데이터분석 준전문가(ADsP)</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <!-- ===================== 포트폴리오 ===================== -->
@@ -263,13 +299,7 @@
           </article>
 
           <!-- 프로젝트 4 -->
-          <article class="project-card reveal" data-accent="#a855f7">
-            <div class="project-thumb thumb-text">
-              <div class="thumb-fallback" aria-hidden="true">
-                <span>91.34%</span>
-                <small>탐지 정확도</small>
-              </div>
-            </div>
+          <article class="project-card no-thumb reveal" data-accent="#a855f7">
             <div class="project-body">
               <p class="project-period">2022.07 – 2023.02 · 대학 캡스톤</p>
               <h3 class="project-name">AI 스피어피싱 메일 탐지</h3>
@@ -309,54 +339,6 @@
             </div>
           </article>
 
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== 자기소개 ===================== -->
-    <section id="about" class="section section-alt">
-      <div class="container about-grid">
-        <header class="section-head reveal about-head">
-          <p class="section-kicker">ABOUT</p>
-          <h2 class="section-title">자기소개</h2>
-          <p class="about-intro">
-            Spring Boot 기반의 안정적이고 확장성 있는 백엔드 설계를 지향하며 성능 최적화와 모니터링을 함께 고려합니다.
-            Docker·Git 활용과 문서화로 배포 안정성과 협업 효율을 챙기고, 사회적 문제 해결을 위한 서비스를 직접 기획·구현해 왔습니다.
-            <strong>겉으로 보이는 기능보다 그 안에서 서비스를 단단하게 만드는 것</strong>, 그것이 제가 개발자로서 추구하는 방향입니다.
-          </p>
-        </header>
-
-        <div class="about-block reveal">
-          <h3 class="about-subtitle">핵심 역량</h3>
-          <ul class="competency-list">
-            <li>Spring Boot 기반 서비스의 백엔드 성능 개선·모니터링 경험</li>
-            <li>ERD 설계부터 핵심 서비스 구현까지 백엔드 전반을 주도적으로 개발</li>
-            <li>Swagger·Notion 기반 문서화로 팀 내 협업 효율 향상</li>
-            <li>Java·Python·C·C++ 등 다양한 언어 경험 → 새 기술 스택 습득에 유리</li>
-            <li>AWS·Airflow·Docker 활용 경험 기반 클라우드 지식</li>
-          </ul>
-        </div>
-
-        <div class="about-block reveal">
-          <h3 class="about-subtitle">기술 스택</h3>
-          <ul class="skill-badges">
-            <li>Java</li><li>Spring Boot</li><li>Python</li><li>MySQL</li><li>Git</li><li>RESTful API</li><li>Docker</li>
-          </ul>
-
-          <h3 class="about-subtitle">학력</h3>
-          <p class="about-line"><strong>광운대학교</strong> 컴퓨터정보공학부 정보통신학전공<br />
-          <span class="muted">2020.03 – 2025.02 졸업 · 자료구조, 알고리즘, 운영체제, 컴퓨터 네트워크, 객체지향프로그래밍 등 이수</span></p>
-        </div>
-
-        <div class="about-block reveal about-awards">
-          <h3 class="about-subtitle">수상 · 자격증 · 어학</h3>
-          <ul class="award-list">
-            <li><span class="award-year">2025.09</span> 제7회 KDT 해커톤 <strong>최우수상</strong></li>
-            <li><span class="award-year">2025.09</span> 정보처리기사</li>
-            <li><span class="award-year">2025.04</span> SQL개발자(SQLD)</li>
-            <li><span class="award-year">2025.11</span> 데이터분석 준전문가(ADsP)</li>
-            <li><span class="award-year">2025.09</span> OPIc IM2 · 영어 일상 회화</li>
-          </ul>
         </div>
       </div>
     </section>
