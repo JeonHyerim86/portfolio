@@ -1,6 +1,7 @@
 import FadeIn from '../components/FadeIn'
 import Magnet from '../components/Magnet'
 import ContactButton from '../components/ContactButton'
+import WaveText from '../components/WaveText'
 import { profile } from '../data/profile'
 
 // design-ex.md HeroSection 구조: 풀뷰포트, 대형 그라디언트 헤딩(상단 중앙),
@@ -22,8 +23,8 @@ export default function HeroSection() {
           </div>
         </FadeIn>
         <FadeIn delay={0.25} y={20}>
-          <p className="mt-3 text-center font-display text-sm uppercase tracking-[0.4em] text-mist/70 sm:text-base md:text-lg">
-            {profile.heroTagline}
+          <p className="mt-3 text-center font-display text-base uppercase tracking-[0.4em] text-mist sm:text-lg md:text-xl">
+            <WaveText text={profile.heroTagline} />
           </p>
         </FadeIn>
       </div>
