@@ -79,7 +79,7 @@ export default function HeroSection() {
           </div>
         </FadeIn>
         <FadeIn delay={0.25} y={20}>
-          <p className="mt-3 text-center font-display text-base uppercase tracking-[0.4em] text-mist sm:text-lg md:text-xl">
+          <p className="mt-3 text-center font-display text-base font-bold uppercase tracking-[0.4em] text-mist sm:text-lg md:text-xl">
             <WaveText text={profile.heroTagline} />
           </p>
         </FadeIn>

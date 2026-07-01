@@ -49,10 +49,18 @@ html {
   0%,
   100% {
     transform: translate(0, 0);
-    filter: drop-shadow(3px 3px 0 rgba(215, 226, 234, 0.22));
   }
   50% {
     transform: translate(3px, 3px);
-    filter: drop-shadow(0 0 0 rgba(215, 226, 234, 0.22));
+  }
+}
+
+/* Contact CTA 픽셀 커서 무지개 빛 — hue만 순환시켜 무지개 채움이 흐른다(주변 그림자 없음) */
+@keyframes cursor-rainbow {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
   }
 }
