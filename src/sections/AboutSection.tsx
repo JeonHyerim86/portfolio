@@ -13,7 +13,7 @@ export default function AboutSection() {
       <FadeIn y={40}>
         <h2
           className="hero-heading text-center font-display font-black uppercase leading-none tracking-tight"
-          style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
+          style={{ fontSize: 'clamp(2.5rem, 8.4vw, 7rem)' }}
         >
           About
         </h2>
@@ -21,12 +21,12 @@ export default function AboutSection() {
 
       <AnimatedText
         text={profile.intro}
-        className="mx-auto max-w-[640px] text-center font-medium leading-relaxed text-mist text-[clamp(1rem,2vw,1.35rem)]"
+        className="mx-auto max-w-[42ch] text-center font-medium leading-relaxed text-mist text-[clamp(1.05rem,1.5vw,1.3rem)]"
       />
 
       {/* 학력 · 수상 · 자격증 */}
       <FadeIn delay={0.1} className="w-full max-w-4xl">
-        <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <dl className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {profile.highlights.map((group) => (
             <div
               key={group.label}
@@ -53,7 +53,7 @@ export default function AboutSection() {
           {profile.skills.map((skill) => (
             <li
               key={skill}
-              className="rounded-full border border-mist/25 px-4 py-2 text-base text-mist/80 sm:text-lg"
+              className="rounded-full border border-mist/25 px-4 py-1.5 text-sm text-mist/80 sm:text-base"
             >
               {skill}
             </li>

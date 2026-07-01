@@ -39,7 +39,7 @@ function ProjectCard({
           <div className="flex items-center gap-4 sm:gap-6">
             <span
               className="font-display font-black leading-none text-mist"
-              style={{ fontSize: 'clamp(2.25rem, 6vw, 84px)' }}
+              style={{ fontSize: 'clamp(1.6rem, 4.6vw, 3.75rem)' }}
             >
               {project.number}
             </span>
@@ -49,7 +49,7 @@ function ProjectCard({
               </p>
               <h3
                 className="font-medium text-mist"
-                style={{ fontSize: 'clamp(1.15rem, 2.6vw, 2.1rem)' }}
+                style={{ fontSize: 'clamp(1.15rem, 1.9vw, 1.6rem)' }}
               >
                 {project.name}
               </h3>
@@ -83,8 +83,7 @@ function ProjectCard({
                   src={src}
                   alt={`${project.alt} ${i + 1}`}
                   loading="lazy"
-                  className="w-full rounded-[20px] object-cover sm:rounded-[28px]"
-                  style={{ height: 'clamp(110px, 15vw, 210px)' }}
+                  className="aspect-[16/10] w-full rounded-[20px] object-cover sm:rounded-[28px]"
                 />
               ))}
             </div>
@@ -93,8 +92,7 @@ function ProjectCard({
                 src={imgs[2]}
                 alt={`${project.alt} 대표`}
                 loading="lazy"
-                className="w-full rounded-[20px] object-cover sm:rounded-[28px]"
-                style={{ height: 'clamp(180px, 32vw, 440px)' }}
+                className="aspect-[4/3.4] w-full rounded-[20px] object-cover sm:rounded-[28px]"
               />
             </div>
           </div>
@@ -107,8 +105,7 @@ function ProjectCard({
                 src={src}
                 alt={`${project.alt} ${i + 1}`}
                 loading="lazy"
-                className="w-full rounded-[20px] object-cover sm:rounded-[28px]"
-                style={{ height: 'clamp(160px, 26vw, 340px)' }}
+                className="aspect-[16/10] w-full rounded-[20px] object-cover sm:rounded-[28px]"
               />
             ))}
           </div>
@@ -118,8 +115,7 @@ function ProjectCard({
             src={imgs[0]}
             alt={`${project.alt} 대표`}
             loading="lazy"
-            className="w-full rounded-[20px] object-cover sm:rounded-[28px]"
-            style={{ height: 'clamp(200px, 34vw, 460px)' }}
+            className="aspect-[16/7] w-full rounded-[20px] object-cover sm:rounded-[28px]"
           />
         ) : (
           <div className="rounded-[20px] border border-mist/20 bg-white/[0.02] p-6 sm:rounded-[28px] sm:p-8">
@@ -155,8 +151,8 @@ export default function ProjectsSection() {
     >
       <FadeIn y={40}>
         <h2
-          className="hero-heading mb-8 text-center font-display font-black uppercase leading-none tracking-tight md:mb-12"
-          style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
+          className="hero-heading mb-10 text-center font-display font-black uppercase leading-none tracking-tight md:mb-14"
+          style={{ fontSize: 'clamp(2.5rem, 8.4vw, 7rem)' }}
         >
           Portfolio
         </h2>

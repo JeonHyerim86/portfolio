@@ -27,14 +27,14 @@ export default function ContactSection() {
       <FadeIn y={40}>
         <h2
           className="hero-heading font-display font-black uppercase leading-none tracking-tight"
-          style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
+          style={{ fontSize: 'clamp(2.5rem, 8.4vw, 7rem)' }}
         >
           Contact
         </h2>
       </FadeIn>
 
       <FadeIn delay={0.1}>
-        <p className="mx-auto max-w-[520px] leading-relaxed text-mist/80 text-[clamp(0.95rem,1.8vw,1.2rem)]">
+        <p className="mx-auto max-w-[40ch] leading-relaxed text-mist/80 text-[clamp(1.05rem,1.5vw,1.3rem)]">
           {contact.invitation}
         </p>
       </FadeIn>

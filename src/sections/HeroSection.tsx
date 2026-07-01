@@ -73,13 +73,13 @@ export default function HeroSection() {
       <div ref={headerRef} className="relative z-20 pt-20 sm:pt-24 md:pt-28">
         <FadeIn delay={0.15} y={40}>
           <div className="overflow-hidden">
-            <h1 className="hero-heading w-full whitespace-nowrap px-4 text-center font-display text-[7.5vw] font-black uppercase leading-none tracking-tight sm:text-[10vw] md:text-[12vw] lg:text-[13vw]">
+            <h1 className="hero-heading w-full whitespace-nowrap px-4 text-center font-display text-[7.5vw] font-black uppercase leading-none tracking-tight sm:text-[9vw] md:text-[9.5vw]">
               {profile.heroHeading}
             </h1>
           </div>
         </FadeIn>
         <FadeIn delay={0.25} y={20}>
-          <p className="mt-3 text-center font-display text-base font-bold uppercase tracking-[0.4em] text-mist sm:text-lg md:text-xl">
+          <p className="mt-3 text-center font-display text-sm font-bold uppercase tracking-[0.22em] text-mist sm:text-lg sm:tracking-[0.32em] md:text-xl md:tracking-[0.4em]">
             <WaveText text={profile.heroTagline} />
           </p>
         </FadeIn>
@@ -113,10 +113,10 @@ export default function HeroSection() {
       {/* 하단 바 */}
       <div className="relative z-20 mt-auto flex items-end justify-between gap-4 px-6 pb-7 sm:pb-8 md:px-10 md:pb-10">
         <FadeIn delay={0.35} y={20}>
-          <div className="max-w-[190px] sm:max-w-[240px] md:max-w-[300px]">
+          <div className="max-w-[240px] sm:max-w-[280px] md:max-w-[300px]">
             <p
-              className="font-light leading-snug tracking-wide text-mist"
-              style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.4rem)' }}
+              className="max-w-[24ch] font-light leading-relaxed tracking-wide text-mist"
+              style={{ fontSize: 'clamp(0.85rem, 1.1vw, 1.05rem)' }}
             >
               {profile.slogan}
             </p>
@@ -124,7 +124,7 @@ export default function HeroSection() {
               {profile.keywords.map((k) => (
                 <li
                   key={k}
-                  className="rounded-full border border-mist/25 px-3 py-1 text-[0.65rem] text-mist/70 sm:text-xs"
+                  className="rounded-full border border-mist/25 px-3 py-1 text-[0.7rem] text-mist/70 sm:text-xs"
                 >
                   {k}
                 </li>

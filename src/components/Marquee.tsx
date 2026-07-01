@@ -46,16 +46,16 @@ export default function Marquee({ row1, row2 }: MarqueeProps) {
   const tripled1 = [...row1, ...row1, ...row1]
   const tripled2 = [...row2, ...row2, ...row2]
 
-  // 좌우 가장자리로 넘어가는 타일이 어둠(그림자) 속으로 점점 사라지도록 마스크 페이드.
+  // 좌우 가장자리로 넘어가는 타일이 어둠(배경색) 속으로 점점 사라지는 페이드.
+  // ⚠️ CSS mask-image로 처리하면, will-change:transform으로 합성된 넓은(≈6500px)
+  // 자식 행들을 하나의 마스크 텍스처로 래스터화하다 실제 GPU(특히 Retina)에서
+  // 간헐적으로 행이 반씩 검게 사라지는 합성 손상이 발생한다. 그래서 마스크 대신
+  // 배경색(ink)으로 페이드하는 일반 그라디언트 오버레이(paint)로 동일 비주얼을 구현.
   const edgeFade =
-    'linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%)'
+    'linear-gradient(to right, #0C0C0C 0%, transparent 13%, transparent 87%, #0C0C0C 100%)'
 
   return (
-    <div
-      ref={sectionRef}
-      className="flex flex-col gap-3 overflow-hidden"
-      style={{ maskImage: edgeFade, WebkitMaskImage: edgeFade }}
-    >
+    <div ref={sectionRef} className="relative flex flex-col gap-3 overflow-hidden">
       <div
         className="flex gap-3"
         style={{ transform: `translateX(${offset - 200}px)`, willChange: 'transform' }}
@@ -72,6 +72,12 @@ export default function Marquee({ row1, row2 }: MarqueeProps) {
           <Tile key={`r2-${i}`} tile={tile} />
         ))}
       </div>
+      {/* 가장자리 페이드 오버레이 — 클릭 방해 없이 양끝을 배경색으로 덮어 사라지게 함 */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{ background: edgeFade }}
+      />
     </div>
   )
 }
