@@ -26,8 +26,6 @@ function ProjectCard({
   const scale = useTransform(progress, range, [1, targetScale])
 
   const imgs = project.images
-  const col1 = imgs.length >= 3 ? [imgs[0], imgs[1]] : imgs.length === 2 ? [imgs[0]] : []
-  const col2 = imgs.length >= 3 ? imgs[2] : imgs.length >= 1 ? imgs[imgs.length - 1] : undefined
 
   return (
     // 카드마다 조금씩 낮은 위치에 sticky로 고정 → 위로 쌓이며 이전 카드가 상단에 살짝 보임.
@@ -74,35 +72,55 @@ function ProjectCard({
           ))}
         </ul>
 
-        {/* 이미지 그리드 또는 텍스트 패널 */}
-        {imgs.length > 0 ? (
+        {/* 이미지 레이아웃 — 장수에 맞춰 배치. 없으면 텍스트 패널. */}
+        {imgs.length >= 3 ? (
+          // 3장 이상: 왼쪽 2단 스택 + 오른쪽 대표 1장
           <div className="flex gap-3 sm:gap-4">
-            {col1.length > 0 && (
-              <div className="flex w-2/5 flex-col gap-3 sm:gap-4">
-                {col1.map((src, i) => (
-                  <img
-                    key={src}
-                    src={src}
-                    alt={`${project.alt} ${i + 1}`}
-                    loading="lazy"
-                    className="w-full rounded-[20px] object-cover sm:rounded-[28px]"
-                    style={{ height: 'clamp(110px, 15vw, 210px)' }}
-                  />
-                ))}
-              </div>
-            )}
-            {col2 && (
-              <div className={col1.length > 0 ? 'w-3/5' : 'w-full'}>
+            <div className="flex w-2/5 flex-col gap-3 sm:gap-4">
+              {[imgs[0], imgs[1]].map((src, i) => (
                 <img
-                  src={col2}
-                  alt={`${project.alt} 대표`}
+                  key={src}
+                  src={src}
+                  alt={`${project.alt} ${i + 1}`}
                   loading="lazy"
                   className="w-full rounded-[20px] object-cover sm:rounded-[28px]"
-                  style={{ height: 'clamp(180px, 32vw, 440px)' }}
+                  style={{ height: 'clamp(110px, 15vw, 210px)' }}
                 />
-              </div>
-            )}
+              ))}
+            </div>
+            <div className="w-3/5">
+              <img
+                src={imgs[2]}
+                alt={`${project.alt} 대표`}
+                loading="lazy"
+                className="w-full rounded-[20px] object-cover sm:rounded-[28px]"
+                style={{ height: 'clamp(180px, 32vw, 440px)' }}
+              />
+            </div>
           </div>
+        ) : imgs.length === 2 ? (
+          // 2장: 동일 너비·높이 2열
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            {imgs.map((src, i) => (
+              <img
+                key={src}
+                src={src}
+                alt={`${project.alt} ${i + 1}`}
+                loading="lazy"
+                className="w-full rounded-[20px] object-cover sm:rounded-[28px]"
+                style={{ height: 'clamp(160px, 26vw, 340px)' }}
+              />
+            ))}
+          </div>
+        ) : imgs.length === 1 ? (
+          // 1장: 전체 너비 단일 이미지
+          <img
+            src={imgs[0]}
+            alt={`${project.alt} 대표`}
+            loading="lazy"
+            className="w-full rounded-[20px] object-cover sm:rounded-[28px]"
+            style={{ height: 'clamp(200px, 34vw, 460px)' }}
+          />
         ) : (
           <div className="rounded-[20px] border border-mist/20 bg-white/[0.02] p-6 sm:rounded-[28px] sm:p-8">
             <p className="max-w-2xl leading-relaxed text-mist/80">{project.summary}</p>

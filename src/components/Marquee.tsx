@@ -13,24 +13,13 @@ const tileBox =
   'shrink-0 w-[280px] h-[180px] sm:w-[360px] sm:h-[230px] md:w-[420px] md:h-[270px] rounded-2xl overflow-hidden'
 
 function Tile({ tile }: { tile: MarqueeTile }) {
-  if (tile.type === 'image') {
-    return (
-      <img
-        src={tile.src}
-        alt={tile.alt ?? ''}
-        loading="lazy"
-        className={`${tileBox} object-cover`}
-      />
-    )
-  }
   return (
-    <div
-      className={`${tileBox} flex items-center justify-center border border-mist/20 bg-white/[0.02]`}
-    >
-      <span className="font-display font-semibold uppercase tracking-wide text-mist/70 text-2xl sm:text-3xl md:text-4xl px-6 text-center">
-        {tile.label}
-      </span>
-    </div>
+    <img
+      src={tile.src}
+      alt={tile.alt}
+      loading="lazy"
+      className={`${tileBox} object-cover`}
+    />
   )
 }
 
@@ -57,8 +46,16 @@ export default function Marquee({ row1, row2 }: MarqueeProps) {
   const tripled1 = [...row1, ...row1, ...row1]
   const tripled2 = [...row2, ...row2, ...row2]
 
+  // 좌우 가장자리로 넘어가는 타일이 어둠(그림자) 속으로 점점 사라지도록 마스크 페이드.
+  const edgeFade =
+    'linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%)'
+
   return (
-    <div ref={sectionRef} className="flex flex-col gap-3 overflow-hidden">
+    <div
+      ref={sectionRef}
+      className="flex flex-col gap-3 overflow-hidden"
+      style={{ maskImage: edgeFade, WebkitMaskImage: edgeFade }}
+    >
       <div
         className="flex gap-3"
         style={{ transform: `translateX(${offset - 200}px)`, willChange: 'transform' }}
