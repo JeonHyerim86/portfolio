@@ -84,9 +84,9 @@ public/              # 최적화 이미지 (portrait, project screenshots)
 
 ## 자산(이미지) 처리
 
-- `ref/`는 **로컬 전용 참고 자산**(`.gitignore`). 커밋하지 않는다. 원본: `3d-profile.png`·`hyerim.png`·`profile.png`(프로필 후보), `이커머스(1~4)`, `해커톤(1~3)`, `de(1~2)`, `wanted-portfolio.pdf`.
+- `ref/`는 **로컬 전용 참고 자산**(`.gitignore`). 커밋하지 않는다. 원본: `3d-profile.png`(검정 배경 원본)·`3d-profile-transparent-src.png`(체커보드 프리뷰 소스)·`hyerim.png`·`profile.png`(프로필 후보), `이커머스(1~4)`, `해커톤(1~3)`, `de(1~2)`, `wanted-portfolio.pdf`.
 - 실제 사용 이미지는 모두 **`public/`**에 둔다: `3d-profile.png`(히어로 캐릭터, 투명 컷아웃), `og-profile.png`(공유용), `ecommerce-1~4`, `hackathon-1~3`, `dashboard-1~2`.
-- **프로필 캐릭터**는 `ref/3d-profile.png`(검정 배경 3D 아바타)의 배경을 **테두리 연결 flood-fill로 투명 처리**해 `public/3d-profile.png`(히어로 투명 컷아웃)와 `public/og-profile.png`(다크 합성)로 만들었다. 이 컷아웃은 **다크 배경 전용**으로 최적화됨(밝은 배경에선 머리카락 부분에 구멍이 보일 수 있음).
+- **프로필 캐릭터**(현재본)는 `ref/3d-profile-transparent-src.png`(같은 캐릭터를 체커보드 배경으로 렌더한 프리뷰 — 실제 알파가 아니라 체커보드가 픽셀로 구워져 있음)에서 **체커보드를 키아웃**해 만들었다. 방법: 밝고 저채도인 체커보드 픽셀을 판별(minc≥185 & 채널폭≤25) → **테두리 연결 성분 + 머리카락 틈에 갇힌 성분(≥40px)만** 투명 처리(작은 조각은 눈 하이라이트 보호를 위해 보존), 가장자리 0.6px 페더 후 콘텐츠 바운딩박스로 크롭. 결과 `public/3d-profile.png`는 **다크·밝은 배경 모두**에서 구멍·halo 없이 깨끗하다(검증 완료). `public/og-profile.png`는 이 컷아웃을 `#0C0C0C`에 합성한 1200×630 카드.
 - 이미지 편집 시 **원본과 비교 검증**하고 배경 제거는 **테두리 연결 영역만** 처리한다(과거 인물 사진 손상 이력).
 - 새 이미지는 `public/`으로 복사(필요 시 WebP·리사이즈)해 관리한다. design-ex.md의 외부 URL(figma/motionsites/cloudfront)은 데모용이므로 **사용하지 않고 실제 자산으로 대체**한다.
 

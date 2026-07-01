@@ -1,5 +1,5 @@
-// 히어로 CTA — 현재 톤앤매너(mist 라이트 필 + ink 텍스트)는 유지하되,
-// 픽셀 아트 커서(마우스 포인터) 모양을 크게 넣고 블록형 픽셀 그림자를 준다.
+// 히어로 CTA — 사각형 버튼이 아니라 "큰 픽셀 커서 모양" 자체가 버튼.
+// 톤앤매너(mist/ink 무채색)는 유지하고, 커서 아래 작은 캡션으로 라벨을 둔다.
 interface ContactButtonProps {
   label?: string
   href?: string
@@ -41,20 +41,24 @@ export default function ContactButton({
   return (
     <a
       href={href}
-      className={`group inline-flex items-center gap-3 rounded-[3px] bg-mist font-semibold uppercase tracking-widest text-ink shadow-[5px_5px_0_0_rgba(215,226,234,0.28)] transition-all duration-150 hover:translate-x-[3px] hover:translate-y-[3px] hover:bg-white hover:shadow-[2px_2px_0_0_rgba(215,226,234,0.28)] px-8 py-4 text-sm sm:gap-4 sm:px-11 sm:py-5 sm:text-base md:px-14 md:text-lg ${className}`}
+      className={`group inline-flex flex-col items-center gap-3 text-mist ${className}`}
     >
-      {label}
+      {/* 버튼 본체 = 큰 픽셀 커서. 호버 중 계속 눌렀다 떼는 press 애니메이션 */}
       <svg
         viewBox="0 0 12 16"
         shapeRendering="crispEdges"
         fill="currentColor"
         aria-hidden="true"
-        className="h-8 w-6 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 sm:h-9 sm:w-7 md:h-11 md:w-8"
+        className="h-20 w-[60px] drop-shadow-[3px_3px_0_rgba(215,226,234,0.22)] group-hover:animate-[cursor-click_0.5s_ease-in-out_infinite] motion-reduce:group-hover:animate-none sm:h-24 sm:w-[72px] md:h-28 md:w-[84px]"
       >
         {CURSOR_PIXELS.map(({ x, y }) => (
           <rect key={`${x}-${y}`} x={x} y={y} width="1" height="1" />
         ))}
       </svg>
+      {/* 라벨 캡션 */}
+      <span className="font-semibold uppercase tracking-[0.2em] text-sm transition-opacity duration-150 group-hover:opacity-70 sm:text-base md:text-lg">
+        {label}
+      </span>
     </a>
   )
 }

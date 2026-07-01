@@ -43,3 +43,16 @@ html {
   outline-offset: 3px;
   border-radius: 4px;
 }
+
+/* Contact CTA 픽셀 커서 클릭 — 호버 중 계속 눌렀다 떼는 press 왕복(무한 반복) */
+@keyframes cursor-click {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    filter: drop-shadow(3px 3px 0 rgba(215, 226, 234, 0.22));
+  }
+  50% {
+    transform: translate(3px, 3px);
+    filter: drop-shadow(0 0 0 rgba(215, 226, 234, 0.22));
+  }
+}
