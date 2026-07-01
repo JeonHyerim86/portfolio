@@ -2,9 +2,10 @@ import { useEffect, useRef } from 'react'
 import type { RefObject } from 'react'
 import { useReducedMotion } from 'framer-motion'
 
-// 움직이는 대상(targetRef)이 이동할 때 뒤에 은하수처럼 반짝이는 별빛을 흩뿌리는 캔버스 레이어.
-// - 부드러운 글로우 + 4방향 스파클(별) 스프라이트, additive 블렌딩, 강한 twinkle로 반짝반짝
-// - 은백/차가운 블루/옅은 골드 색 변주로 은하수 느낌, z는 캐릭터 "뒤"
+// 움직이는 대상(targetRef) 뒤에 별처럼 반짝이는 파티클을 흩뿌리는 캔버스 레이어.
+// - 8방향 스파클(별) + 부드러운 글로우, additive 블렌딩, 또렷한 twinkle로 별처럼 반짝
+// - 세로 위치를 아래로 편향 샘플링해 "위→아래로 점점 더 많이" 나오는 밀도 그라데이션
+// - 은은한 중력으로 아래로 흐름, z는 캐릭터 "뒤"
 // - prefers-reduced-motion·비-hover(터치) 환경에서는 비활성화
 interface ParticleTrailProps {
   targetRef: RefObject<HTMLElement | null>
@@ -18,11 +19,11 @@ interface P {
   vy: number
   life: number // 1 → 0
   ttl: number // 수명(ms)
-  size: number // 그리기 크기(px)
-  phase: number // 반짝임 위상
-  tw: number // 반짝임 속도
-  spark: boolean // 스파클(별) 여부
-  tint: number // 글로우 색 인덱스
+  size: number
+  phase: number
+  tw: number
+  spark: boolean
+  tint: number
 }
 
 export default function ParticleTrail({ targetRef, containerRef }: ParticleTrailProps) {
@@ -61,29 +62,32 @@ export default function ParticleTrail({ targetRef, containerRef }: ParticleTrail
       x.fill()
       return c
     })
-    // 4방향 광선 스파클(별)
+    // 8방향 광선 스파클(별) — 긴 십자 + 짧은 대각선
     const sparkleSprite = (() => {
       const { c, x } = mk()
-      const core = x.createRadialGradient(SS / 2, SS / 2, 0, SS / 2, SS / 2, SS * 0.18)
+      const core = x.createRadialGradient(SS / 2, SS / 2, 0, SS / 2, SS / 2, SS * 0.2)
       core.addColorStop(0, 'rgba(255,255,255,1)')
       core.addColorStop(1, 'rgba(255,255,255,0)')
       x.fillStyle = core
       x.beginPath()
-      x.arc(SS / 2, SS / 2, SS * 0.18, 0, Math.PI * 2)
+      x.arc(SS / 2, SS / 2, SS * 0.2, 0, Math.PI * 2)
       x.fill()
-      const ray = (horizontal: boolean) => {
-        const g = horizontal
-          ? x.createLinearGradient(0, 0, SS, 0)
-          : x.createLinearGradient(0, 0, 0, SS)
-        g.addColorStop(0, 'rgba(232,240,255,0)')
-        g.addColorStop(0.5, 'rgba(232,240,255,0.95)')
-        g.addColorStop(1, 'rgba(232,240,255,0)')
+      const ray = (rot: number, len: number, alpha: number, thick: number) => {
+        x.save()
+        x.translate(SS / 2, SS / 2)
+        x.rotate(rot)
+        const g = x.createLinearGradient(-len, 0, len, 0)
+        g.addColorStop(0, 'rgba(240,246,255,0)')
+        g.addColorStop(0.5, `rgba(240,246,255,${alpha})`)
+        g.addColorStop(1, 'rgba(240,246,255,0)')
         x.fillStyle = g
-        if (horizontal) x.fillRect(0, SS / 2 - 1, SS, 2)
-        else x.fillRect(SS / 2 - 1, 0, 2, SS)
+        x.fillRect(-len, -thick / 2, len * 2, thick)
+        x.restore()
       }
-      ray(true)
-      ray(false)
+      ray(0, SS / 2, 0.95, 2) // 가로(길게)
+      ray(Math.PI / 2, SS / 2, 0.95, 2) // 세로(길게)
+      ray(Math.PI / 4, SS * 0.32, 0.5, 1.4) // 대각(짧게)
+      ray(-Math.PI / 4, SS * 0.32, 0.5, 1.4)
       return c
     })()
 
@@ -116,30 +120,32 @@ export default function ParticleTrail({ targetRef, containerRef }: ParticleTrail
       if (tRect) {
         const cx = tRect.left - cRect.left + tRect.width / 2
         const cy = tRect.top - cRect.top + tRect.height / 2
+        const w = tRect.width
+        const h = tRect.height
+        const top = cy - h / 2
         if (last) {
           const dx = cx - last.x
           const dy = cy - last.y
           const speed = Math.hypot(dx, dy)
-          if (speed > 1.1) {
-            const count = Math.min(7, Math.floor(speed / 3) + 2)
-            const spread = tRect.width * 0.44
+          if (speed > 0.7) {
+            const count = Math.min(20, Math.floor(speed / 1.6) + 6)
             for (let i = 0; i < count; i++) {
-              const ang = Math.random() * Math.PI * 2
-              const rad = spread * (0.45 + Math.random() * 0.6)
-              const rt = Math.random()
-              const spark = Math.random() < 0.32 // 일부는 반짝 스파클
+              // v: 0(위) → 1(아래). sqrt로 아래쪽 밀도를 높인다(그라데이션).
+              const v = Math.sqrt(Math.random())
+              const spreadX = w * (0.26 + 0.28 * v) // 아래로 갈수록 가로로 더 퍼짐
+              const spark = Math.random() < 0.5 // 절반은 반짝이는 별
               particles.push({
-                x: cx - dx * 0.22 + Math.cos(ang) * rad * 0.72,
-                y: cy - dy * 0.22 + Math.sin(ang) * rad,
-                vx: -dx * 0.06 + (Math.random() - 0.5) * 0.35,
-                vy: -dy * 0.06 + (Math.random() - 0.5) * 0.35 - 0.1,
+                x: cx - dx * 0.2 + (Math.random() - 0.5) * spreadX,
+                y: top + v * h - dy * 0.2,
+                vx: -dx * 0.05 + (Math.random() - 0.5) * 0.3,
+                vy: -dy * 0.05 + (Math.random() - 0.5) * 0.3 + 0.15, // 살짝 아래로
                 life: 1,
-                ttl: 900 + Math.random() * 950,
-                size: spark ? 9 + Math.random() * 14 : 5 + Math.random() * 12,
+                ttl: 950 + Math.random() * 950,
+                size: spark ? 10 + Math.random() * 15 : 5 + Math.random() * 12,
                 phase: Math.random() * Math.PI * 2,
-                tw: 1.4 + Math.random() * 3.2, // 더 빠르고 다양한 반짝임
+                tw: 1.6 + Math.random() * 3.4,
                 spark,
-                tint: rt < 0.62 ? 0 : rt < 0.85 ? 1 : 2, // 은백 위주 + 블루/골드
+                tint: Math.random() < 0.62 ? 0 : Math.random() < 0.6 ? 1 : 2,
               })
             }
           }
@@ -151,18 +157,19 @@ export default function ParticleTrail({ targetRef, containerRef }: ParticleTrail
       particles = particles.filter((p) => {
         p.life -= dt / p.ttl
         if (p.life <= 0) return false
+        p.vy += dt * 0.0011 // 은은한 중력 → 아래로 흐름
         p.x += p.vx * dt * 0.05
         p.y += p.vy * dt * 0.05
         return true
       })
-      if (particles.length > 460) particles.splice(0, particles.length - 460)
+      if (particles.length > 1000) particles.splice(0, particles.length - 1000)
 
       ctx.globalCompositeOperation = 'lighter'
       for (const p of particles) {
-        const s01 = 0.5 + 0.5 * Math.sin(p.phase + t * 0.01 * p.tw)
-        // 스파클은 날카롭게 번쩍(twinkle), 글로우는 은은하게
-        const tw = p.spark ? Math.pow(s01, 3) : 0.35 + 0.65 * s01
-        ctx.globalAlpha = Math.max(0, p.life) * (p.spark ? 0.95 : 0.5) * tw
+        const s01 = 0.5 + 0.5 * Math.sin(p.phase + t * 0.011 * p.tw)
+        // 별은 날카롭게 번쩍(twinkle), 글로우는 은은하게
+        const tw = p.spark ? Math.pow(s01, 4) : 0.35 + 0.6 * s01
+        ctx.globalAlpha = Math.max(0, p.life) * (p.spark ? 1 : 0.5) * tw
         const s = p.size * (0.45 + p.life * 0.6)
         const sprite = p.spark ? sparkleSprite : glowSprites[p.tint]
         ctx.drawImage(sprite, p.x - s / 2, p.y - s / 2, s, s)
