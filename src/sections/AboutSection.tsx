@@ -32,12 +32,12 @@ export default function AboutSection() {
               key={group.label}
               className="rounded-2xl border border-mist/15 bg-white/[0.02] p-5 sm:p-6"
             >
-              <dt className="mb-2 font-display text-xs uppercase tracking-widest text-mist/50">
+              <dt className="mb-2 font-display text-sm uppercase tracking-widest text-mist/50 sm:text-base">
                 {group.label}
               </dt>
               <dd className="space-y-1">
                 {group.items.map((item) => (
-                  <p key={item} className="text-sm leading-relaxed text-mist sm:text-base">
+                  <p key={item} className="text-base leading-relaxed text-mist sm:text-lg">
                     {item}
                   </p>
                 ))}
@@ -53,7 +53,7 @@ export default function AboutSection() {
           {profile.skills.map((skill) => (
             <li
               key={skill}
-              className="rounded-full border border-mist/25 px-4 py-1.5 text-sm text-mist/80"
+              className="rounded-full border border-mist/25 px-4 py-2 text-base text-mist/80 sm:text-lg"
             >
               {skill}
             </li>

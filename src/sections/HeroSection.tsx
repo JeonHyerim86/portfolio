@@ -1,5 +1,6 @@
 import FadeIn from '../components/FadeIn'
 import Magnet from '../components/Magnet'
+import ContactButton from '../components/ContactButton'
 import { profile } from '../data/profile'
 
 // design-ex.md HeroSection 구조: 풀뷰포트, 대형 그라디언트 헤딩(상단 중앙),
@@ -63,6 +64,11 @@ export default function HeroSection() {
               ))}
             </ul>
           </div>
+        </FadeIn>
+
+        {/* 우측 하단 CTA */}
+        <FadeIn delay={0.5} y={20}>
+          <ContactButton label="Contact me" href="#contact" />
         </FadeIn>
       </div>
     </section>

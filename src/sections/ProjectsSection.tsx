@@ -1,43 +1,40 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import type { MotionValue } from 'framer-motion'
 import FadeIn from '../components/FadeIn'
 import GhostButton from '../components/GhostButton'
 import { projects } from '../data/projects'
 import type { Project } from '../data/projects'
 
-// design-ex.md ProjectsSection: 다크 배경 + 상단 라운드, 위 섹션 위로 겹치기(-mt),
-// sticky 스택 카드가 스크롤에 따라 축소된다.
+// design-ex.md ProjectsSection: 다크 배경 + 상단 라운드, 위 섹션 위로 겹치기(-mt).
+// 애니메이션: sticky 스택 — 각 카드가 이전 카드 위로 올라와 쌓이며(뒤 카드는 살짝 축소).
 function ProjectCard({
   project,
   index,
-  total,
+  progress,
+  range,
+  targetScale,
 }: {
   project: Project
   index: number
-  total: number
+  progress: MotionValue<number>
+  range: [number, number]
+  targetScale: number
 }) {
-  const ref = useRef<HTMLDivElement>(null)
   const reduce = useReducedMotion()
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end start'],
-  })
-  // 뒤 카드일수록 더 작게 스케일다운되어 아래에 쌓인다.
-  const targetScale = 1 - (total - 1 - index) * 0.03
-  const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale])
+  // 섹션 전체 스크롤 진행도에 따라 아래(먼저 쌓인) 카드일수록 더 작아진다.
+  const scale = useTransform(progress, range, [1, targetScale])
 
   const imgs = project.images
   const col1 = imgs.length >= 3 ? [imgs[0], imgs[1]] : imgs.length === 2 ? [imgs[0]] : []
   const col2 = imgs.length >= 3 ? imgs[2] : imgs.length >= 1 ? imgs[imgs.length - 1] : undefined
 
   return (
-    <div ref={ref} className="h-[85vh]">
+    // 카드마다 조금씩 낮은 위치에 sticky로 고정 → 위로 쌓이며 이전 카드가 상단에 살짝 보임.
+    <div className="sticky" style={{ top: `calc(5.5rem + ${index * 34}px)` }}>
       <motion.div
-        style={{
-          scale: reduce ? 1 : scale,
-          top: `calc(6rem + ${index * 28}px)`,
-        }}
-        className="sticky mx-auto w-full max-w-6xl origin-top rounded-[32px] border-2 border-mist bg-ink p-4 sm:rounded-[44px] sm:p-6 md:rounded-[56px] md:p-8"
+        style={{ scale: reduce ? 1 : scale }}
+        className="mx-auto mb-6 w-full max-w-6xl origin-top rounded-[32px] border-2 border-mist bg-ink p-4 sm:mb-8 sm:rounded-[44px] sm:p-6 md:rounded-[56px] md:p-8"
       >
         {/* 상단 행 */}
         <div className="mb-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 md:mb-7">
@@ -126,6 +123,13 @@ function ProjectCard({
 }
 
 export default function ProjectsSection() {
+  const container = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ['start start', 'end end'],
+  })
+  const total = projects.length
+
   return (
     <section
       id="portfolio"
@@ -140,13 +144,16 @@ export default function ProjectsSection() {
         </h2>
       </FadeIn>
 
-      <div className="mx-auto max-w-6xl">
+      {/* pb로 마지막 카드가 쌓인 뒤에도 스크롤 여유를 둔다 */}
+      <div ref={container} className="relative mx-auto max-w-6xl pb-[35vh]">
         {projects.map((project, i) => (
           <ProjectCard
             key={project.number}
             project={project}
             index={i}
-            total={projects.length}
+            progress={scrollYProgress}
+            range={[i / total, 1]}
+            targetScale={1 - (total - 1 - i) * 0.05}
           />
         ))}
       </div>
