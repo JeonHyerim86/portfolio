@@ -48,20 +48,24 @@ design-ex.md의 섹션 순서를 유지하되 내용을 PRD로 채운다.
 
 | # | design-ex 섹션 | 전혜림 매핑 | 콘텐츠 출처(PRD) |
 |---|----------------|-------------|------------------|
-| 1 | HeroSection | **홈** — 이름(전혜림)·직무(백엔드 개발자)·슬로건·프로필(마그네틱)·CTA·상단 nav | §6.1 |
+| 1 | HeroSection | **홈** — 상단 중앙 대형 헤딩("HI, I'M HYERIM") + 태그라인("Backend Developer"), 그 아래 마그네틱 캐릭터(커서 추종), 하단 좌 슬로건·키워드 / 우 "Contact me" CTA | §6.1 |
 | 2 | MarqueeSection | 스크롤 연동 마퀴 — 프로젝트 스크린샷/기술 키워드 타일 (더미 GIF 대체) | §6.2 자산 |
-| 3 | AboutSection | **자기소개** — 개발 철학 캐릭터 리빌 텍스트 | §6.3 소개문 |
+| 3 | AboutSection | **자기소개** — 개발 철학 캐릭터 리빌 텍스트 + 학력/수상/자격증 카드 + 스킬 배지 | §6.3 |
 | 4 | ServicesSection | **핵심 역량 (Expertise)** — 5개 번호 리스트 (화이트 섹션) | §6.3 핵심 역량 5개 |
-| 5 | ProjectsSection | **포트폴리오** — sticky 스택 카드 (실제 프로젝트 4개) | §6.2 표 |
+| 5 | ProjectsSection | **포트폴리오** — sticky 스택 카드 (실제 프로젝트 4개, 다음 카드가 위로 쌓이고 뒤 카드는 축소) | §6.2 표 |
 | + | (신규) ContactSection | **연락처** — 이메일(mailto+복사)·GitHub. 전화 비공개 | §6.4 |
 
-- 상단 nav 링크는 한국어로: 자기소개 / 역량 / 포트폴리오 / 연락처 (스크롤 스파이 + 스무스 스크롤).
+- 상단 고정 nav 링크는 한국어: 자기소개 / 역량 / 포트폴리오 / 연락처 (스크롤 스파이 + 스무스 스크롤). **모바일에서도 4개 링크를 인라인 표시**(축약, 햄버거 없음). 브랜드는 "전혜림".
+- 히어로 대형 헤딩/태그라인은 영문 디스플레이("HI, I'M HYERIM" / "Backend Developer")로 처리. 프로필 이름 "전혜림"(`profile.name`)은 nav 브랜드·이미지 alt·카피라이트에 사용하고, 히어로 표시 문구는 `profile.heroHeading`/`heroTagline` 필드로 분리.
 - ServicesSection의 5개 항목 = PRD §6.3 핵심 역량: ①백엔드 성능 최적화 ②백엔드 설계·구현 주도 ③문서화·협업 ④폭넓은 언어 경험 ⑤클라우드·데이터.
 - 포트폴리오 4개: ①크라우드펀딩 E-commerce ②재가요양 인력배정(해커톤 최우수상) ③주식 트렌드 대시보드 ④AI 스피어피싱 탐지(캡스톤).
 
 ## 재사용 컴포넌트 (design-ex.md)
 
-`FadeIn`(whileInView 진입), `Magnet`(마우스 추종 자석), `AnimatedText`(스크롤 캐릭터 리빌), `ContactButton`(포인트 그라디언트 필), `GhostButton`(고스트 필), `Marquee`(스크롤 연동 가로 스크롤). design-ex.md의 파라미터·이징 값을 따른다(FadeIn easing `[0.25,0.1,0.25,1]`, Magnet padding/strength 등).
+`FadeIn`(whileInView 진입, easing `[0.25,0.1,0.25,1]`), `Magnet`(커서 추종 자석), `AnimatedText`(스크롤 캐릭터 리빌), `ContactButton`(포인트 그라디언트 필, uppercase), `GhostButton`(고스트 필), `Marquee`(스크롤 연동 가로 스크롤).
+
+- `Magnet`은 Framer Motion `useMotionValue` + `useSpring` 기반으로 커서를 **부드럽게(관성)** 추종한다. `padding`(반응 반경)·`strength`(이동 감쇠)·`maxOffsetX`/`maxOffsetY`(가로/세로 최대 이동)로 조절하며, 히어로 캐릭터는 가로로 넓게 추종하도록 `maxOffsetX`를 크게 둔다. 센터링(`-translate-x/y`)과 충돌하지 않도록 **위치는 래퍼가, 추종 transform은 Magnet이** 담당한다.
+- 포트폴리오 sticky 스택은 각 카드를 `sticky`로 조금씩 낮은 `top`에 고정 + 섹션 스크롤 진행도로 뒤 카드 `scale` 축소.
 
 ## 프로젝트 구조 (목표)
 
@@ -80,18 +84,18 @@ public/              # 최적화 이미지 (portrait, project screenshots)
 
 ## 자산(이미지) 처리
 
-- `ref/`는 **로컬 전용 참고 자산**(`.gitignore`). 커밋하지 않는다. 원본: `hyerim.png`/`profile.png`(프로필), `이커머스(1~4)`, `해커톤(1~3)`, `de(1~2)`.
-- `assets/img/`에 최적화본이 이미 있음: `ecommerce-1~4`, `hackathon-1~3`, `dashboard-1~2`.
-- React에서 쓸 이미지는 `public/`으로 복사(필요 시 WebP·리사이즈)해 관리한다.
-- 프로필(마그네틱 portrait)은 `hyerim.png` 사용. 이미지 편집 시 원본과 비교 검증하고 배경 제거는 테두리 연결 영역만 처리(과거 인물 사진 손상 이력).
-- design-ex.md의 외부 URL(figma/motionsites/cloudfront)은 데모용이므로 **사용하지 않고 위 실제 자산으로 대체**한다.
+- `ref/`는 **로컬 전용 참고 자산**(`.gitignore`). 커밋하지 않는다. 원본: `3d-profile.png`·`hyerim.png`·`profile.png`(프로필 후보), `이커머스(1~4)`, `해커톤(1~3)`, `de(1~2)`, `wanted-portfolio.pdf`.
+- 실제 사용 이미지는 모두 **`public/`**에 둔다: `3d-profile.png`(히어로 캐릭터, 투명 컷아웃), `og-profile.png`(공유용), `ecommerce-1~4`, `hackathon-1~3`, `dashboard-1~2`.
+- **프로필 캐릭터**는 `ref/3d-profile.png`(검정 배경 3D 아바타)의 배경을 **테두리 연결 flood-fill로 투명 처리**해 `public/3d-profile.png`(히어로 투명 컷아웃)와 `public/og-profile.png`(다크 합성)로 만들었다. 이 컷아웃은 **다크 배경 전용**으로 최적화됨(밝은 배경에선 머리카락 부분에 구멍이 보일 수 있음).
+- 이미지 편집 시 **원본과 비교 검증**하고 배경 제거는 **테두리 연결 영역만** 처리한다(과거 인물 사진 손상 이력).
+- 새 이미지는 `public/`으로 복사(필요 시 WebP·리사이즈)해 관리한다. design-ex.md의 외부 URL(figma/motionsites/cloudfront)은 데모용이므로 **사용하지 않고 실제 자산으로 대체**한다.
 
 ## 명령어
 
 ```bash
 npm install       # 의존성 설치
 npm run dev       # 개발 서버
-npm run build     # 프로덕션 빌드 (tsc + vite build)
+npm run build     # 프로덕션 빌드 (tsc --noEmit 타입체크 + vite build)
 npm run preview   # 빌드 결과 로컬 프리뷰
 ```
 
@@ -115,7 +119,7 @@ npm run preview   # 빌드 결과 로컬 프리뷰
 
 - `main` / `01-prd`: 정적 HTML/CSS/JS 버전(`index.html`, `assets/`). git에 보존됨.
 - **`02-use-react`(현재 브랜치): design-ex.md 디자인 시스템으로 React 재구현.**
-- 루트 `index.html`은 Vite(React) 진입점으로 교체된다(기존 정적 버전은 git 이력·타 브랜치에 보존). 구 `assets/css`·`assets/js`는 미사용 상태로 남으며, 정리는 이식 확인 후 사용자 승인하에 진행.
+- 루트 `index.html`은 Vite(React) 진입점으로 교체됨. 구 정적 자산(`assets/css`·`assets/js`·`assets/img`)은 React 이식 완료 후 **삭제**했다(정적 버전은 `main`/`01-prd` 브랜치와 git 이력에 보존).
 
 ## 작업 방식
 
