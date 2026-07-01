@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>전혜림 · 백엔드 개발자 포트폴리오</title>
+  <meta name="description" content="서비스의 겉보다 속을 고민하는 백엔드 개발자 전혜림의 자기소개·포트폴리오. Spring Boot 기반 성능 최적화, 데이터 파이프라인, 클라우드 경험." />
+  <meta name="author" content="전혜림" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="전혜림 · 백엔드 개발자 포트폴리오" />
+  <meta property="og:description" content="서비스의 겉보다 속을, 더 좋은 서비스를 위해 고민하는 백엔드 개발자." />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="theme-color" content="#0b1220" />
+
+  <!-- Pretendard -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#home">본문으로 건너뛰기</a>
+
+  <!-- ===================== 헤더 / GNB ===================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-wrap">
+      <a href="#home" class="brand" aria-label="전혜림 홈으로">전혜림<span class="brand-dot">.</span></a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="primaryNav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="#home" class="nav-link" data-nav="home">홈</a></li>
+          <li><a href="#about" class="nav-link" data-nav="about">자기소개</a></li>
+          <li><a href="#portfolio" class="nav-link" data-nav="portfolio">포트폴리오</a></li>
+          <li><a href="#contact" class="nav-link" data-nav="contact">연락처</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================== 홈 / HERO ===================== -->
+    <section id="home" class="hero" aria-label="소개">
+      <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+      <div class="hero-glow" data-parallax="0.25" aria-hidden="true"></div>
+
+      <div class="container hero-inner">
+        <div class="hero-text" data-parallax="0.08">
+          <p class="hero-eyebrow reveal">BACKEND DEVELOPER</p>
+          <h1 class="hero-title reveal">
+            안녕하세요,<br />백엔드 개발자 <span class="accent-text">전혜림</span>입니다.
+          </h1>
+          <p class="hero-slogan reveal">
+            “서비스의 겉보다 속을, 더 좋은 서비스를 위해 고민하는 개발자”
+          </p>
+          <ul class="hero-tags reveal" aria-label="핵심 키워드">
+            <li>Spring Boot</li>
+            <li>백엔드 성능 최적화</li>
+            <li>데이터 파이프라인</li>
+            <li>Docker / CI·CD</li>
+          </ul>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-cue" aria-label="아래로 스크롤">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ===================== 자기소개 ===================== -->
+    <section id="about" class="section section-alt">
+      <div class="container about-grid">
+        <header class="section-head reveal about-head">
+          <p class="section-kicker">ABOUT</p>
+          <h2 class="section-title">자기소개</h2>
+          <p class="about-intro">
+            Spring Boot 기반의 안정적이고 확장성 있는 백엔드 설계를 지향하며 성능 최적화와 모니터링을 함께 고려합니다.
+            Docker·Git 활용과 문서화로 배포 안정성과 협업 효율을 챙기고, 사회적 문제 해결을 위한 서비스를 직접 기획·구현해 왔습니다.
+            <strong>겉으로 보이는 기능보다 그 안에서 서비스를 단단하게 만드는 것</strong>, 그것이 제가 개발자로서 추구하는 방향입니다.
+          </p>
+        </header>
+
+        <div class="about-block reveal">
+          <h3 class="about-subtitle">핵심 역량</h3>
+          <ul class="competency-list">
+            <li>Spring Boot 기반 서비스의 백엔드 성능 개선·모니터링 경험</li>
+            <li>ERD 설계부터 핵심 서비스 구현까지 백엔드 전반을 주도적으로 개발</li>
+            <li>Swagger·Notion 기반 문서화로 팀 내 협업 효율 향상</li>
+            <li>Java·Python·C·C++ 등 다양한 언어 경험 → 새 기술 스택 습득에 유리</li>
+            <li>AWS·Airflow·Docker 활용 경험 기반 클라우드 지식</li>
+          </ul>
+        </div>
+
+        <div class="about-block reveal">
+          <h3 class="about-subtitle">기술 스택</h3>
+          <ul class="skill-badges">
+            <li>Java</li><li>Spring Boot</li><li>Python</li><li>MySQL</li><li>Git</li><li>RESTful API</li><li>Docker</li>
+          </ul>
+
+          <h3 class="about-subtitle">학력</h3>
+          <p class="about-line"><strong>광운대학교</strong> 컴퓨터정보공학부 정보통신학전공<br />
+          <span class="muted">2020.03 – 2025.02 졸업 · 자료구조, 알고리즘, 운영체제, 컴퓨터 네트워크, 객체지향프로그래밍 등 이수</span></p>
+        </div>
+
+        <div class="about-block reveal about-awards">
+          <h3 class="about-subtitle">수상 · 자격증</h3>
+          <ul class="award-list">
+            <li><span class="award-year">2025.09</span> 제7회 KDT 해커톤 <strong>최우수상</strong></li>
+            <li><span class="award-year">2025.09</span> 정보처리기사</li>
+            <li><span class="award-year">2025.04</span> SQL개발자(SQLD)</li>
+            <li><span class="award-year">2025.11</span> 데이터분석 준전문가(ADsP)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 포트폴리오 ===================== -->
+    <section id="portfolio" class="section">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-kicker">PORTFOLIO</p>
+          <h2 class="section-title">대표 프로젝트</h2>
+          <p class="section-desc">백엔드 설계부터 성능 최적화, 데이터 파이프라인까지 — 문제를 정의하고 직접 해결한 결과물입니다.</p>
+        </header>
+
+        <div class="project-grid">
+
+          <!-- 프로젝트 1 -->
+          <article class="project-card reveal" data-accent="#5468ff">
+            <div class="project-thumb">
+              <img src="assets/img/ecommerce-1.png" alt="크라우드 펀딩 E-commerce 플랫폼 상품 목록 화면" loading="lazy" />
+              <span class="project-badge">대표</span>
+            </div>
+            <div class="project-body">
+              <p class="project-period">2025.04 – 2025.06 · goorm PROFECT 풀스택 2기</p>
+              <h3 class="project-name">크라우드 펀딩 E-commerce 플랫폼</h3>
+              <p class="project-summary">ERD 설계부터 메인 도메인·이미지 처리·FCM 알림까지 백엔드 전반을 구현. 알림 로직을 비동기·논블로킹으로 전환해 성능을 끌어올렸습니다.</p>
+              <ul class="project-metrics" aria-label="핵심 성과">
+                <li><strong>+250%</strong><span>초당 요청</span></li>
+                <li><strong>-12%</strong><span>CPU 사용률</span></li>
+                <li><strong>+50%</strong><span>TPS</span></li>
+              </ul>
+              <ul class="tech-badges">
+                <li>Java</li><li>Spring Boot</li><li>MySQL</li><li>QueryDSL</li><li>FCM</li><li>JMeter</li>
+              </ul>
+              <button type="button" class="btn btn-detail" data-open-project="ecommerce">상세 보기</button>
+            </div>
+
+            <div class="project-full" id="full-ecommerce" hidden>
+              <div class="modal-gallery">
+                <img src="assets/img/ecommerce-1.png" alt="E-commerce 상품 목록(마감임박) 화면" loading="lazy" />
+                <img src="assets/img/ecommerce-2.png" alt="E-commerce 화면 2" loading="lazy" />
+                <img src="assets/img/ecommerce-3.png" alt="E-commerce 화면 3" loading="lazy" />
+                <img src="assets/img/ecommerce-4.png" alt="E-commerce 화면 4" loading="lazy" />
+              </div>
+              <p class="modal-lead">상품·유저·썸네일 등 여러 도메인의 이미지를 중간 테이블로 통합 관리하도록 설계하고, 실시간 알림에서 스레드 풀 고갈 문제를 비동기·논블로킹 전환과 풀 튜닝으로 해결했습니다. 실제 WAS 환경에서 JMeter 부하 테스트로 성능을 검증했습니다.</p>
+              <div class="modal-cols">
+                <div>
+                  <h4>역할</h4>
+                  <ul>
+                    <li>ERD 설계부터 메인 도메인 서비스, 이미지 처리, FCM 알림 구현</li>
+                    <li>스레드 풀 튜닝 및 알림 전송 로직의 비동기·논블로킹 전환</li>
+                    <li>상품·이미지 도메인 로직 구현</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>성과</h4>
+                  <ul>
+                    <li>실시간 알림 초당 최대 요청 수 250% 증가, CPU 12% 감소, TPS 50% 향상</li>
+                    <li>실제 WAS 환경 부하 테스트를 통한 성능 검증</li>
+                    <li>AI 도구 활용으로 반복 코드 자동화 및 문제 해결 속도 향상</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>협업</h4>
+                  <ul>
+                    <li>Swagger·Notion 기반 API 명세 및 협업 문서 체계화</li>
+                    <li>GitHub Actions 기반 CI/CD 환경 구성 참여</li>
+                  </ul>
+                </div>
+              </div>
+              <ul class="tech-badges modal-tech">
+                <li>Java</li><li>Spring Boot</li><li>MySQL</li><li>QueryDSL</li><li>FCM</li><li>JMeter</li><li>Docker</li><li>GitHub Actions</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 프로젝트 2 -->
+          <article class="project-card reveal" data-accent="#22c55e">
+            <div class="project-thumb">
+              <img src="assets/img/hackathon-1.png" alt="재가요양 자동 인력 배정 플랫폼 서비스 화면" loading="lazy" />
+              <span class="project-badge badge-award">최우수상</span>
+            </div>
+            <div class="project-body">
+              <p class="project-period">2025.06 – 2025.09 · 제7회 KDT 해커톤</p>
+              <h3 class="project-name">재가요양 자동 인력 배정 플랫폼</h3>
+              <p class="project-summary">지방 재가요양 인력 단절 문제를 스케줄 최적화로 해결. 요양보호사 3인 인터뷰로 현장 요구사항을 반영해 확장 가능한 ERD를 설계했습니다.</p>
+              <ul class="project-metrics" aria-label="핵심 성과">
+                <li><strong>최우수상</strong><span>해커톤 수상</span></li>
+                <li><strong>3인</strong><span>현장 인터뷰</span></li>
+                <li><strong>N:M</strong><span>배정 설계</span></li>
+              </ul>
+              <ul class="tech-badges">
+                <li>Java</li><li>Spring Boot</li><li>PostgreSQL</li><li>Docker</li><li>GitHub Actions</li>
+              </ul>
+              <button type="button" class="btn btn-detail" data-open-project="hackathon">상세 보기</button>
+            </div>
+
+            <div class="project-full" id="full-hackathon" hidden>
+              <div class="modal-gallery">
+                <img src="assets/img/hackathon-1.png" alt="재가요양 플랫폼 신청·매칭 흐름" loading="lazy" />
+                <img src="assets/img/hackathon-2.png" alt="재가요양 플랫폼 화면 2" loading="lazy" />
+                <img src="assets/img/hackathon-3.png" alt="재가요양 플랫폼 화면 3" loading="lazy" />
+              </div>
+              <p class="modal-lead">‘지역 균형 발전’을 주제로 센터·신청자·요양보호사 간 다대다 배정 관계를 중간 테이블로 분리하고 서비스 신청 상태 흐름을 ERD에 명시했습니다. 시간 제약이 큰 해커톤 특성상 변경 비용이 큰 설계(연관관계 방향, 상태값 관리)를 우선 확정하는 방식으로 접근했습니다.</p>
+              <div class="modal-cols">
+                <div>
+                  <h4>역할</h4>
+                  <ul>
+                    <li>ERD 설계</li>
+                    <li>Spring Boot·PostgreSQL 기반 요양사·수급자 관리, 서비스 신청·조회 기능 구현</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>성과</h4>
+                  <ul>
+                    <li>요양보호사 3인 인터뷰를 통한 현장 요구사항 반영</li>
+                    <li>복잡한 서비스 구조를 고려한 확장 가능한 ERD 설계</li>
+                    <li>실제 운영까지 고려한 기획으로 최우수상 수상</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>협업</h4>
+                  <ul>
+                    <li>GitHub CI/CD를 활용한 협업 효율 향상</li>
+                    <li>Swagger·Notion으로 API 명세 및 협업 문서 체계화</li>
+                  </ul>
+                </div>
+              </div>
+              <ul class="tech-badges modal-tech">
+                <li>Java</li><li>Spring Boot</li><li>PostgreSQL</li><li>GitHub Actions</li><li>Docker</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 프로젝트 3 -->
+          <article class="project-card reveal" data-accent="#0ea5e9">
+            <div class="project-thumb">
+              <img src="assets/img/dashboard-1.jpg" alt="주식 시장 트렌드 분석 대시보드 화면" loading="lazy" />
+            </div>
+            <div class="project-body">
+              <p class="project-period">2024.12 – 2025.01</p>
+              <h3 class="project-name">주식 시장 트렌드 분석 대시보드</h3>
+              <p class="project-summary">주식 초보자를 위한 뉴스레터형 대시보드. 산발적으로 실행되던 수집·정제를 Airflow DAG와 Docker로 통일해 재현 가능한 파이프라인으로 만들었습니다.</p>
+              <ul class="project-metrics" aria-label="핵심 성과">
+                <li><strong>자동화</strong><span>수집→정제→적재</span></li>
+                <li><strong>일 단위</strong><span>키워드 리포트</span></li>
+                <li><strong>AWS</strong><span>S3·Redshift</span></li>
+              </ul>
+              <ul class="tech-badges">
+                <li>Python</li><li>Airflow</li><li>Docker</li><li>AWS</li><li>Superset</li>
+              </ul>
+              <button type="button" class="btn btn-detail" data-open-project="dashboard">상세 보기</button>
+            </div>
+
+            <div class="project-full" id="full-dashboard" hidden>
+              <div class="modal-gallery">
+                <img src="assets/img/dashboard-1.jpg" alt="주식 대시보드 메인 화면" loading="lazy" />
+                <img src="assets/img/dashboard-2.png" alt="주식 대시보드 화면 2" loading="lazy" />
+              </div>
+              <p class="modal-lead">데이터 수집과 전처리가 로컬에서 산발적으로 실행되어 재현성이 없던 문제를, Airflow DAG로 수집→정제→적재 흐름을 스케줄 단위로 분리하고 Docker로 실행 환경을 통일해 해결했습니다. Transformer로 키워드를 추출해 AWS S3·Redshift에 적재하고 Superset으로 시각화하는 전체 파이프라인을 완성했습니다.</p>
+              <div class="modal-cols">
+                <div>
+                  <h4>역할</h4>
+                  <ul>
+                    <li>커뮤니티 데이터 자동 수집 및 정제 프로세스 설계</li>
+                    <li>Airflow DAG를 통한 스케줄링 자동화 구현</li>
+                    <li>Docker 기반 협업 환경 구축</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>성과</h4>
+                  <ul>
+                    <li>Transformer 활용 유의미한 키워드 추출 자동화</li>
+                    <li>일 단위 키워드 리포트 제공 파이프라인 완성</li>
+                    <li>AWS 기본 설계 직접 구현으로 데이터 흐름 전체 관점 습득</li>
+                  </ul>
+                </div>
+              </div>
+              <ul class="tech-badges modal-tech">
+                <li>Python</li><li>Docker</li><li>Airflow</li><li>AWS EC2·S3·Redshift</li><li>Apache Superset</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 프로젝트 4 -->
+          <article class="project-card no-thumb reveal" data-accent="#a855f7">
+            <div class="project-body">
+              <p class="project-period">2022.07 – 2023.02 · 대학 캡스톤</p>
+              <h3 class="project-name">AI 스피어피싱 메일 탐지</h3>
+              <p class="project-summary">BERT와 Decision Tree를 결합한 탐지 모델. 성능 저하의 원인을 모델이 아닌 데이터 전처리에서 찾아 파이프라인을 자동화하고 품질을 개선했습니다.</p>
+              <ul class="project-metrics" aria-label="핵심 성과">
+                <li><strong>91.34%</strong><span>탐지 정확도</span></li>
+                <li><strong>자동화</strong><span>전처리 파이프라인</span></li>
+                <li><strong>BERT</strong><span>+ Decision Tree</span></li>
+              </ul>
+              <ul class="tech-badges">
+                <li>Python</li><li>BERT</li><li>Decision Tree</li><li>데이터 전처리</li>
+              </ul>
+              <button type="button" class="btn btn-detail" data-open-project="phishing">상세 보기</button>
+            </div>
+
+            <div class="project-full" id="full-phishing" hidden>
+              <p class="modal-lead">대학 캡스톤으로 BERT와 Decision Tree를 결합한 스피어피싱 메일 탐지 모델을 개발했습니다. 초기 성능이 기대치보다 낮았을 때 원인을 모델 구조보다 데이터 전처리에서 먼저 찾았고, 수집·토크나이징의 불일치를 자동화 파이프라인으로 개선해 팀 전체가 동일한 품질의 데이터를 사용하도록 했습니다. 이후 하이퍼파라미터 조정과 훈련-검증 반복으로 최종 정확도 약 91.34%를 달성했습니다.</p>
+              <div class="modal-cols">
+                <div>
+                  <h4>역할</h4>
+                  <ul>
+                    <li>데이터 수집·전처리, 토크나이징 과정 자동화</li>
+                    <li>하이퍼파라미터 조정 및 모델 검증</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>성과</h4>
+                  <ul>
+                    <li>자체 학습 엔진으로 탐지 정확도 약 91.34% 달성</li>
+                    <li>팀의 반복 작업 제거 및 데이터 구축 속도·재현성 향상</li>
+                  </ul>
+                </div>
+              </div>
+              <ul class="tech-badges modal-tech">
+                <li>Python</li><li>BERT</li><li>데이터 크롤링·전처리</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 연락처 ===================== -->
+    <section id="contact" class="section contact">
+      <div class="container contact-inner reveal">
+        <p class="section-kicker">CONTACT</p>
+        <h2 class="section-title">함께 일하고 싶다면</h2>
+        <p class="contact-desc">제 자기소개와 포트폴리오가 좋게 보이셨다면 편하게 연락 주세요.</p>
+
+        <div class="contact-actions">
+          <a class="contact-card" href="mailto:jshsn0806@naver.com">
+            <span class="contact-label">Email</span>
+            <span class="contact-value" id="emailValue">jshsn0806@naver.com</span>
+          </a>
+          <button type="button" class="contact-copy" id="copyEmail" aria-label="이메일 주소 복사" data-email="jshsn0806@naver.com">복사</button>
+          <a class="contact-card" href="https://github.com/JeonHyerim86" target="_blank" rel="noopener noreferrer">
+            <span class="contact-label">GitHub</span>
+            <span class="contact-value">github.com/JeonHyerim86</span>
+          </a>
+        </div>
+        <p class="copy-toast" id="copyToast" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 전혜림 (Hyerim Jeon) · Backend Developer</p>
+    </div>
+  </footer>
+
+  <!-- ===================== 프로젝트 상세 모달 ===================== -->
+  <div class="modal" id="projectModal" hidden>
+    <div class="modal-overlay" data-close-modal></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button type="button" class="modal-close" id="modalClose" aria-label="닫기">&times;</button>
+      <h3 class="modal-title" id="modalTitle"></h3>
+      <p class="modal-period" id="modalPeriod"></p>
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
