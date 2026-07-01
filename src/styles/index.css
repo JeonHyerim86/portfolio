@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── 전역 (design-ex.md GLOBAL STYLES) ─────────────────────── */
+html,
+body,
+#root {
+  background: #0c0c0c;
+  color: #d7e2ea;
+}
+
+body {
+  font-family: 'Pretendard', 'Kanit', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* 부드러운 스크롤 (스무스 스크롤) — 모션 최소화 설정 존중 */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* 상단 고정 nav 높이 보정 */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* 그라디언트 헤딩 (design-ex.md .hero-heading) */
+.hero-heading {
+  background: linear-gradient(180deg, #646973 0%, #bbccd7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* 포커스 접근성 */
+:focus-visible {
+  outline: 2px solid #bbccd7;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
