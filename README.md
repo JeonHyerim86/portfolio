@@ -66,7 +66,3 @@ public/              # 이미지 (프로필 캐릭터, 프로젝트 스크린샷
 정적 사이트로 빌드되며(`dist/`), Vite `base`가 `'./'`로 설정돼 있어
 **GitHub Pages / Vercel** 등 정적 호스팅에 그대로 올릴 수 있습니다.
 
-## 연락처
-
-- 이메일 · `jshsn0806@naver.com`
-- GitHub · https://github.com/JeonHyerim86
