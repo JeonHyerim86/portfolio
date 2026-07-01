@@ -5,8 +5,10 @@ export interface HighlightGroup {
 }
 
 export const profile = {
-  name: '전혜림',
+  name: '전혜림', // 네비 브랜드 · 이미지 alt · 카피라이트 등에서 사용
   role: '백엔드 개발자',
+  heroHeading: "HI, I'M HYERIM", // 히어로 대형 헤딩 (영문 디스플레이)
+  heroTagline: 'Backend Developer', // 히어로 헤딩 하단 라벨
   slogan: '서비스의 겉보다 속을, 더 좋은 서비스를 위해 고민하는 개발자',
   keywords: ['Spring Boot', '백엔드 성능 최적화', '데이터 파이프라인', 'Docker/CI·CD'],
   portrait: './3d-profile.png',
