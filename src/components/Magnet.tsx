@@ -16,6 +16,10 @@ interface MagnetProps {
   maxOffsetUp?: number // 위(음의 y)로 최대 이동 거리 (미지정 시 maxOffsetY)
   maxOffsetDown?: number // 아래(양의 y)로 최대 이동 거리 (미지정 시 maxOffsetY)
   boundsRef?: RefObject<HTMLElement | null> // 지정 시 커서가 이 요소 영역 안일 때만 반응
+  tilt?: boolean // 켜면 커서 방향으로 3D 틸트(rotateX/rotateY)까지 적용 → 평면 이미지가 입체적으로 보임
+  maxTilt?: number // 최대 기울기(도). 기본 12
+  tiltRange?: number // 이 픽셀 거리에서 maxTilt에 도달 (작을수록 민감). 기본 220
+  perspective?: number // 3D 원근 깊이(px). 작을수록 왜곡이 강함. 기본 900
   className?: string
 }
 
@@ -31,6 +35,10 @@ export default function Magnet({
   maxOffsetUp,
   maxOffsetDown,
   boundsRef,
+  tilt = false,
+  maxTilt = 12,
+  tiltRange = 220,
+  perspective = 900,
   className,
 }: MagnetProps) {
   const mx = maxOffsetX ?? maxOffset
@@ -41,10 +49,17 @@ export default function Magnet({
   const reduce = useReducedMotion()
   const x = useMotionValue(0)
   const y = useMotionValue(0)
+  // 커서 방향 3D 틸트: rotateX(위아래), rotateY(좌우)
+  const rx = useMotionValue(0)
+  const ry = useMotionValue(0)
   // 부드러운 관성 보간
   const spring = { stiffness: 150, damping: 15, mass: 0.5 }
   const sx = useSpring(x, spring)
   const sy = useSpring(y, spring)
+  // 틸트는 조금 더 느긋하게(관성 크게) 보간해 무게감을 준다
+  const tiltSpring = { stiffness: 110, damping: 18, mass: 0.7 }
+  const srx = useSpring(rx, tiltSpring)
+  const sry = useSpring(ry, tiltSpring)
 
   useEffect(() => {
     if (reduce) return
@@ -75,14 +90,23 @@ export default function Magnet({
       if (inRange) {
         x.set(clamp(dx / strength, -mx, mx))
         y.set(clamp(dy / strength, -up, down))
+        if (tilt) {
+          // 커서 쪽으로 얼굴이 향하듯 기울인다: 오른쪽이면 rotateY+, 위쪽이면 rotateX+.
+          ry.set(clamp((dx / tiltRange) * maxTilt, -maxTilt, maxTilt))
+          rx.set(clamp((-dy / tiltRange) * maxTilt, -maxTilt, maxTilt))
+        }
       } else {
         x.set(0)
         y.set(0)
+        rx.set(0)
+        ry.set(0)
       }
     }
     const reset = () => {
       x.set(0)
       y.set(0)
+      rx.set(0)
+      ry.set(0)
     }
 
     window.addEventListener('mousemove', onMove, { passive: true })
@@ -91,7 +115,7 @@ export default function Magnet({
       window.removeEventListener('mousemove', onMove)
       window.removeEventListener('mouseleave', reset)
     }
-  }, [padding, strength, mx, up, down, boundsRef, reduce, x, y])
+  }, [padding, strength, mx, up, down, boundsRef, reduce, x, y, tilt, maxTilt, tiltRange, rx, ry])
 
   return (
     <motion.div
@@ -99,7 +123,22 @@ export default function Magnet({
       className={className}
       style={{ x: reduce ? 0 : sx, y: reduce ? 0 : sy, willChange: 'transform' }}
     >
-      {children}
+      {tilt && !reduce ? (
+        // 위치 이동(바깥)과 3D 틸트(안쪽)를 분리해, 틸트만 원근을 받도록 한다.
+        <motion.div
+          style={{
+            rotateX: srx,
+            rotateY: sry,
+            transformPerspective: perspective,
+            transformStyle: 'preserve-3d',
+            willChange: 'transform',
+          }}
+        >
+          {children}
+        </motion.div>
+      ) : (
+        children
+      )}
     </motion.div>
   )
 }

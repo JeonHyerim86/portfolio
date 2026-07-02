@@ -34,7 +34,7 @@ export default function ExpertiseSection() {
                   {item.name}
                 </h3>
                 <p
-                  className="mt-2 max-w-[52ch] font-light leading-relaxed opacity-60"
+                  className="mt-2 max-w-[52ch] break-keep font-light leading-relaxed opacity-60"
                   style={{ fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)' }}
                 >
                   {item.description}

@@ -34,7 +34,7 @@ export default function ContactSection() {
       </FadeIn>
 
       <FadeIn delay={0.1}>
-        <p className="mx-auto max-w-[40ch] leading-relaxed text-mist/80 text-[clamp(1.05rem,1.5vw,1.3rem)]">
+        <p className="mx-auto max-w-[40ch] break-keep leading-relaxed text-mist/80 text-[clamp(1.05rem,1.5vw,1.3rem)]">
           {contact.invitation}
         </p>
       </FadeIn>

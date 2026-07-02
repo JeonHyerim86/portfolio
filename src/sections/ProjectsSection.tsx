@@ -119,7 +119,7 @@ function ProjectCard({
           />
         ) : (
           <div className="rounded-[20px] border border-mist/20 bg-white/[0.02] p-6 sm:rounded-[28px] sm:p-8">
-            <p className="max-w-2xl leading-relaxed text-mist/80">{project.summary}</p>
+            <p className="max-w-[52ch] break-keep leading-relaxed text-mist/80">{project.summary}</p>
           </div>
         )}
 

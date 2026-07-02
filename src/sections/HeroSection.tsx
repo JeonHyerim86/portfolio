@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
 import FadeIn from '../components/FadeIn'
 import Magnet from '../components/Magnet'
 import ContactButton from '../components/ContactButton'
@@ -9,6 +10,7 @@ import { profile } from '../data/profile'
 // design-ex.md HeroSection 구조: 풀뷰포트, 대형 그라디언트 헤딩(상단 중앙),
 // 글자 아래 마그네틱 포트레이트, 하단 좌(문구) 바.
 export default function HeroSection() {
+  const reduce = useReducedMotion()
   const heroRef = useRef<HTMLElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const charRef = useRef<HTMLDivElement>(null)
@@ -91,21 +93,57 @@ export default function HeroSection() {
         ref={charRef}
         className="absolute bottom-0 left-1/2 z-10 w-[280px] -translate-x-1/2 sm:w-[380px] md:w-[440px] lg:w-[500px]"
       >
+        {/* 접지 그림자: 바닥에 고정(틸트/이동에 안 딸려감). 부유와 동기화해 캐릭터가
+            뜨면 작아지고 옅어져 공간감을 준다. 다크 배경이라 순검정 소프트 타원. */}
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-[7%] z-0 mx-auto h-[7%] w-[64%] rounded-[50%] bg-black blur-2xl"
+          style={{ willChange: 'transform, opacity' }}
+          animate={reduce ? undefined : { scaleX: [1, 0.85, 1], opacity: [0.7, 0.45, 0.7] }}
+          transition={
+            reduce ? undefined : { duration: 4.5, ease: 'easeInOut', repeat: Infinity }
+          }
+        />
         <Magnet
           boundsRef={heroRef}
           strength={1.15}
           maxOffsetX={range.x}
           maxOffsetUp={range.up}
           maxOffsetDown={range.down}
+          tilt
+          maxTilt={12}
+          tiltRange={240}
+          perspective={950}
         >
           <FadeIn delay={0.6} y={30}>
-            <img
-              ref={portraitRef}
-              src={profile.portrait}
-              alt={`${profile.name} 프로필 사진`}
-              className="h-auto w-full select-none"
-              draggable={false}
-            />
+            <div className="relative">
+              {/* 뒤 방사형 글로우: 다크 배경에서 캐릭터를 분리해 튀어나와 보이게 */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute left-1/2 top-[38%] -z-10 h-[72%] w-[88%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] blur-3xl"
+                style={{
+                  background:
+                    'radial-gradient(50% 50% at 50% 50%, rgba(187,204,215,0.22) 0%, rgba(118,33,176,0.15) 45%, transparent 72%)',
+                }}
+              />
+              {/* 부유(bob): 위아래로 천천히 떠다녀 살아있는 입체감 */}
+              <motion.div
+                animate={reduce ? undefined : { y: [0, -12, 0] }}
+                transition={
+                  reduce ? undefined : { duration: 4.5, ease: 'easeInOut', repeat: Infinity }
+                }
+                style={{ willChange: 'transform' }}
+              >
+                <img
+                  ref={portraitRef}
+                  src={profile.portrait}
+                  alt={`${profile.name} 프로필 사진`}
+                  className="h-auto w-full select-none"
+                  style={{ filter: 'drop-shadow(0 22px 26px rgba(0,0,0,0.5))' }}
+                  draggable={false}
+                />
+              </motion.div>
+            </div>
           </FadeIn>
         </Magnet>
       </div>
@@ -115,7 +153,7 @@ export default function HeroSection() {
         <FadeIn delay={0.35} y={20}>
           <div className="max-w-[240px] sm:max-w-[280px] md:max-w-[300px]">
             <p
-              className="max-w-[24ch] font-light leading-relaxed tracking-wide text-mist"
+              className="max-w-[24ch] break-keep font-light leading-relaxed tracking-wide text-mist"
               style={{ fontSize: 'clamp(0.85rem, 1.1vw, 1.05rem)' }}
             >
               {profile.slogan}
