@@ -3,8 +3,8 @@ import { motion, useReducedMotion } from 'framer-motion'
 import FadeIn from '../components/FadeIn'
 import Magnet from '../components/Magnet'
 import ContactButton from '../components/ContactButton'
-import WaveText from '../components/WaveText'
 import ParticleTrail from '../components/ParticleTrail'
+import CodeBackdrop from '../components/CodeBackdrop'
 import { profile } from '../data/profile'
 
 // design-ex.md HeroSection 구조: 풀뷰포트, 대형 그라디언트 헤딩(상단 중앙),
@@ -68,6 +68,9 @@ export default function HeroSection() {
       className="relative flex h-screen flex-col"
       style={{ overflowX: 'clip' }}
     >
+      {/* 배경: 전혜림의 실제 백엔드 코드가 한 글자씩 타이핑되어 화면을 채우면 다시 시작 */}
+      <CodeBackdrop />
+
       {/* 캐릭터 움직임에 따라 픽셀 파티클 잔상을 남기는 캔버스 레이어 */}
       <ParticleTrail containerRef={heroRef} targetRef={portraitRef} />
 
@@ -82,7 +85,7 @@ export default function HeroSection() {
         </FadeIn>
         <FadeIn delay={0.25} y={20}>
           <p className="mt-3 text-center font-display text-sm font-bold uppercase tracking-[0.22em] text-mist sm:text-lg sm:tracking-[0.32em] md:text-xl md:tracking-[0.4em]">
-            <WaveText text={profile.heroTagline} />
+            {profile.heroTagline}
           </p>
         </FadeIn>
       </div>
@@ -110,10 +113,6 @@ export default function HeroSection() {
           maxOffsetX={range.x}
           maxOffsetUp={range.up}
           maxOffsetDown={range.down}
-          tilt
-          maxTilt={12}
-          tiltRange={240}
-          perspective={950}
         >
           <FadeIn delay={0.6} y={30}>
             <div className="relative">
