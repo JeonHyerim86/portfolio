@@ -7,8 +7,10 @@ dist/
 *.local
 .vite/
 
-# Claude Code local settings
-.claude/settings.local.json
+# Claude Code local settings & tooling (skills / agents — not portfolio source)
+.claude/
+.agents/
+skills-lock.json
 
 # Reference materials (local only)
 ref/

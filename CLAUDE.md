@@ -41,6 +41,7 @@ Claude Code는 이 문서의 지침을 우선적으로 따릅니다.
 - **고스트 버튼**(LiveProject 류): 투명 배경 + `border-2 #D7E2EA` + hover 시 `bg-#D7E2EA/10`.
 - **라운드**: 카드·섹션 상단은 `rounded-[40px] sm:[50px] md:[60px]` 스케일.
 - **반응형**: Tailwind 기본 브레이크포인트(sm 640 / md 768 / lg 1024), 모바일 퍼스트, `clamp()` 유동 타이포.
+- **타입·간격 스케일 (조화 통일)**: 위계는 히어로 헤딩 > 섹션 헤딩 > 넘버 > 타이틀 > 본문. 섹션 헤딩 `clamp(2.5rem,8.4vw,7rem)`, 역량·포트폴리오 넘버 `clamp(1.6rem,4.6vw,3.75rem)`, 타이틀 `clamp(1.15rem,1.9vw,1.6rem)`, 리드문 `clamp(1.05rem,1.5vw,1.3rem)`, 본문 `clamp(0.95rem,1.2vw,1.1rem)`. 히어로 헤딩은 `text-[7.5vw] sm:text-[9vw] md:text-[9.5vw]`(좌우 여백 확보). 본문 줄길이는 measure로 제한(리드 40ch·본문 52ch·슬로건 24ch). **한글 본문 문단은 `break-keep`(word-break: keep-all)** 로 어절 단위 줄바꿈해 음절 중간 끊김을 막는다(단, `AnimatedText`는 어절을 `inline-block`으로 감싸 이미 안전).
 
 ## 섹션 구조 & 매핑 (design-ex 틀 → 전혜림 콘텐츠)
 
@@ -84,9 +85,10 @@ public/              # 최적화 이미지 (portrait, project screenshots)
 
 ## 자산(이미지) 처리
 
-- `ref/`는 **로컬 전용 참고 자산**(`.gitignore`). 커밋하지 않는다. 원본: `3d-profile.png`·`hyerim.png`·`profile.png`(프로필 후보), `이커머스(1~4)`, `해커톤(1~3)`, `de(1~2)`, `wanted-portfolio.pdf`.
+- `ref/`는 **로컬 전용 참고 자산**(`.gitignore`). 커밋하지 않는다. 원본: `3d-profile.png`(검정 배경 원본)·`3d-profile-transparent-src.png`(체커보드 프리뷰 소스), `이커머스(1~4)`, `해커톤(1~3)`, `de(1~2)`, `wanted-portfolio.pdf`.
 - 실제 사용 이미지는 모두 **`public/`**에 둔다: `3d-profile.png`(히어로 캐릭터, 투명 컷아웃), `og-profile.png`(공유용), `ecommerce-1~4`, `hackathon-1~3`, `dashboard-1~2`.
-- **프로필 캐릭터**는 `ref/3d-profile.png`(검정 배경 3D 아바타)의 배경을 **테두리 연결 flood-fill로 투명 처리**해 `public/3d-profile.png`(히어로 투명 컷아웃)와 `public/og-profile.png`(다크 합성)로 만들었다. 이 컷아웃은 **다크 배경 전용**으로 최적화됨(밝은 배경에선 머리카락 부분에 구멍이 보일 수 있음).
+- **프로필 캐릭터**(현재본)는 `ref/3d-profile-transparent-src.png`(같은 캐릭터를 체커보드 배경으로 렌더한 프리뷰 — 실제 알파가 아니라 체커보드가 픽셀로 구워져 있음)에서 **체커보드를 키아웃**해 만들었다. 방법: 밝고 저채도인 체커보드 픽셀을 판별(minc≥185 & 채널폭≤25) → **테두리 연결 성분 + 머리카락 틈에 갇힌 성분(≥40px)만** 투명 처리(작은 조각은 눈 하이라이트 보호를 위해 보존), 가장자리 0.6px 페더 후 콘텐츠 바운딩박스로 크롭.
+- **엣지 디컨탬(색 오염 제거) 후처리**: 위 키아웃본은 실루엣 외곽 ~2px에 밝은 회백색 헤일로(RGB≈[185,181,180], 저채도, 반투명 α≈125)가 남아 **다크 배경(`#0C0C0C`)에서 흰 테두리**로 보였다. 이를 제거하기 위해 **경계 3px 밴드 안**의 "밝고 저채도(minc≥120 & 채널폭≤60)" 오염 픽셀만 골라 **가장 가까운 안쪽 clean 픽셀(α>200 & 비오염 & 3px 침식) 색으로 대체**(안쪽 머리색을 바깥으로 블리드)하고, 반투명 오염 픽셀은 α를 0.75배로 낮춰 페이드시켰다. **알파(실루엣)는 보존**(머리카락 안 깎임)하고 **경계 밴드에만 적용**(눈 하이라이트·귀걸이·얼굴 내부 무손상). 결과 외곽 링 평균색 [185,181,180]→[83,74,74], 헤일로 비율 0.84→0.00, 다크 배경 합성 육안 검증 완료. 현재 `public/3d-profile.png`는 **다크·밝은 배경 모두**에서 구멍·halo 없이 깨끗하다. `public/og-profile.png`는 이 컷아웃을 `#0C0C0C`에 합성한 1200×630 카드(컷아웃 갱신 시 함께 재생성).
 - 이미지 편집 시 **원본과 비교 검증**하고 배경 제거는 **테두리 연결 영역만** 처리한다(과거 인물 사진 손상 이력).
 - 새 이미지는 `public/`으로 복사(필요 시 WebP·리사이즈)해 관리한다. design-ex.md의 외부 URL(figma/motionsites/cloudfront)은 데모용이므로 **사용하지 않고 실제 자산으로 대체**한다.
 
@@ -118,7 +120,8 @@ npm run preview   # 빌드 결과 로컬 프리뷰
 ## 마이그레이션 컨텍스트
 
 - `main` / `01-prd`: 정적 HTML/CSS/JS 버전(`index.html`, `assets/`). git에 보존됨.
-- **`02-use-react`(현재 브랜치): design-ex.md 디자인 시스템으로 React 재구현.**
+- `02-use-react`: design-ex.md 디자인 시스템으로 React 재구현.
+- **`03-develop-design`(현재 브랜치): 타입 스케일·여백·이미지 비율 등 디자인 조화(harmony) 다듬기.**
 - 루트 `index.html`은 Vite(React) 진입점으로 교체됨. 구 정적 자산(`assets/css`·`assets/js`·`assets/img`)은 React 이식 완료 후 **삭제**했다(정적 버전은 `main`/`01-prd` 브랜치와 git 이력에 보존).
 
 ## 작업 방식

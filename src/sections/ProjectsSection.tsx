@@ -26,8 +26,6 @@ function ProjectCard({
   const scale = useTransform(progress, range, [1, targetScale])
 
   const imgs = project.images
-  const col1 = imgs.length >= 3 ? [imgs[0], imgs[1]] : imgs.length === 2 ? [imgs[0]] : []
-  const col2 = imgs.length >= 3 ? imgs[2] : imgs.length >= 1 ? imgs[imgs.length - 1] : undefined
 
   return (
     // 카드마다 조금씩 낮은 위치에 sticky로 고정 → 위로 쌓이며 이전 카드가 상단에 살짝 보임.
@@ -41,7 +39,7 @@ function ProjectCard({
           <div className="flex items-center gap-4 sm:gap-6">
             <span
               className="font-display font-black leading-none text-mist"
-              style={{ fontSize: 'clamp(2.25rem, 6vw, 84px)' }}
+              style={{ fontSize: 'clamp(1.6rem, 4.6vw, 3.75rem)' }}
             >
               {project.number}
             </span>
@@ -51,7 +49,7 @@ function ProjectCard({
               </p>
               <h3
                 className="font-medium text-mist"
-                style={{ fontSize: 'clamp(1.15rem, 2.6vw, 2.1rem)' }}
+                style={{ fontSize: 'clamp(1.15rem, 1.9vw, 1.6rem)' }}
               >
                 {project.name}
               </h3>
@@ -74,38 +72,54 @@ function ProjectCard({
           ))}
         </ul>
 
-        {/* 이미지 그리드 또는 텍스트 패널 */}
-        {imgs.length > 0 ? (
+        {/* 이미지 레이아웃 — 장수에 맞춰 배치. 없으면 텍스트 패널. */}
+        {imgs.length >= 3 ? (
+          // 3장 이상: 왼쪽 2단 스택 + 오른쪽 대표 1장
           <div className="flex gap-3 sm:gap-4">
-            {col1.length > 0 && (
-              <div className="flex w-2/5 flex-col gap-3 sm:gap-4">
-                {col1.map((src, i) => (
-                  <img
-                    key={src}
-                    src={src}
-                    alt={`${project.alt} ${i + 1}`}
-                    loading="lazy"
-                    className="w-full rounded-[20px] object-cover sm:rounded-[28px]"
-                    style={{ height: 'clamp(110px, 15vw, 210px)' }}
-                  />
-                ))}
-              </div>
-            )}
-            {col2 && (
-              <div className={col1.length > 0 ? 'w-3/5' : 'w-full'}>
+            <div className="flex w-2/5 flex-col gap-3 sm:gap-4">
+              {[imgs[0], imgs[1]].map((src, i) => (
                 <img
-                  src={col2}
-                  alt={`${project.alt} 대표`}
+                  key={src}
+                  src={src}
+                  alt={`${project.alt} ${i + 1}`}
                   loading="lazy"
-                  className="w-full rounded-[20px] object-cover sm:rounded-[28px]"
-                  style={{ height: 'clamp(180px, 32vw, 440px)' }}
+                  className="aspect-[16/10] w-full rounded-[20px] object-cover sm:rounded-[28px]"
                 />
-              </div>
-            )}
+              ))}
+            </div>
+            <div className="w-3/5">
+              <img
+                src={imgs[2]}
+                alt={`${project.alt} 대표`}
+                loading="lazy"
+                className="aspect-[4/3.4] w-full rounded-[20px] object-cover sm:rounded-[28px]"
+              />
+            </div>
           </div>
+        ) : imgs.length === 2 ? (
+          // 2장: 동일 너비·높이 2열
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            {imgs.map((src, i) => (
+              <img
+                key={src}
+                src={src}
+                alt={`${project.alt} ${i + 1}`}
+                loading="lazy"
+                className="aspect-[16/10] w-full rounded-[20px] object-cover sm:rounded-[28px]"
+              />
+            ))}
+          </div>
+        ) : imgs.length === 1 ? (
+          // 1장: 전체 너비 단일 이미지
+          <img
+            src={imgs[0]}
+            alt={`${project.alt} 대표`}
+            loading="lazy"
+            className="aspect-[16/7] w-full rounded-[20px] object-cover sm:rounded-[28px]"
+          />
         ) : (
           <div className="rounded-[20px] border border-mist/20 bg-white/[0.02] p-6 sm:rounded-[28px] sm:p-8">
-            <p className="max-w-2xl leading-relaxed text-mist/80">{project.summary}</p>
+            <p className="max-w-[52ch] break-keep leading-relaxed text-mist/80">{project.summary}</p>
           </div>
         )}
 
@@ -137,8 +151,8 @@ export default function ProjectsSection() {
     >
       <FadeIn y={40}>
         <h2
-          className="hero-heading mb-8 text-center font-display font-black uppercase leading-none tracking-tight md:mb-12"
-          style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
+          className="hero-heading mb-10 text-center font-display font-black uppercase leading-none tracking-tight md:mb-14"
+          style={{ fontSize: 'clamp(2.5rem, 8.4vw, 7rem)' }}
         >
           Portfolio
         </h2>

@@ -43,3 +43,24 @@ html {
   outline-offset: 3px;
   border-radius: 4px;
 }
+
+/* Contact CTA 픽셀 커서 클릭 — 호버 중 계속 눌렀다 떼는 press 왕복(무한 반복) */
+@keyframes cursor-click {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(3px, 3px);
+  }
+}
+
+/* Contact CTA 픽셀 커서 무지개 빛 — hue만 순환시켜 무지개 채움이 흐른다(주변 그림자 없음) */
+@keyframes cursor-rainbow {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
