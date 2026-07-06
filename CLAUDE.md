@@ -53,7 +53,7 @@ design-ex.md의 섹션 순서를 유지하되 내용을 PRD로 채운다.
 | 2 | MarqueeSection | 스크롤 연동 마퀴 — 프로젝트 스크린샷/기술 키워드 타일 (더미 GIF 대체) | §6.2 자산 |
 | 3 | AboutSection | **자기소개** — 개발 철학 캐릭터 리빌 텍스트 + 학력/수상/자격증 카드 + 스킬 배지 | §6.3 |
 | 4 | ServicesSection | **핵심 역량 (Expertise)** — 5개 번호 리스트 (화이트 섹션) | §6.3 핵심 역량 5개 |
-| 5 | ProjectsSection | **포트폴리오** — sticky 스택 카드 (실제 프로젝트 4개, 다음 카드가 위로 쌓이고 뒤 카드는 축소) | §6.2 표 |
+| 5 | ProjectsSection | **포트폴리오** — sticky 스택 카드 (실제 프로젝트 4개, 다음 카드가 위로 쌓이고 뒤 카드는 축소). 카드/‘자세히 보기’ 클릭 시 **상세 팝업(ProjectModal)** — 제목·기간·인원·기술스택·설명·역할/성과·회고 + 하단 GitHub 배너 | §6.2 표 + 포트폴리오·원티드 PDF |
 | + | (신규) ContactSection | **연락처** — 이메일(mailto+복사)·GitHub. 전화 비공개 | §6.4 |
 
 - 상단 고정 nav 링크는 한국어: 자기소개 / 역량 / 포트폴리오 / 연락처 (스크롤 스파이 + 스무스 스크롤). **모바일에서도 4개 링크를 인라인 표시**(축약, 햄버거 없음). 브랜드는 "전혜림".
@@ -67,6 +67,7 @@ design-ex.md의 섹션 순서를 유지하되 내용을 PRD로 채운다.
 
 - `Magnet`은 Framer Motion `useMotionValue` + `useSpring` 기반으로 커서를 **부드럽게(관성)** 추종한다. `padding`(반응 반경)·`strength`(이동 감쇠)·`maxOffsetX`/`maxOffsetY`(가로/세로 최대 이동)로 조절하며, 히어로 캐릭터는 가로로 넓게 추종하도록 `maxOffsetX`를 크게 둔다. 센터링(`-translate-x/y`)과 충돌하지 않도록 **위치는 래퍼가, 추종 transform은 Magnet이** 담당한다.
 - 포트폴리오 sticky 스택은 각 카드를 `sticky`로 조금씩 낮은 `top`에 고정 + 섹션 스크롤 진행도로 뒤 카드 `scale` 축소.
+- `ProjectModal`은 프로젝트 상세 팝업. 콘텐츠는 `projects.ts`의 `detail`(인원·역할·기술스택·설명·역할별 기여·성과·회고·`repo`)에서 온다. **`createPortal`로 `document.body`에 렌더**(섹션의 `relative z-10` stacking context를 벗어나야 최상단에 뜸 — 안 하면 히어로 텍스트가 위로 비침). 접근성: `role=dialog`·`aria-modal`, 스크롤 잠금, Esc 닫기, 포커스 트랩, `prefers-reduced-motion` 존중. 하단 GitHub 배너는 **가운데 정렬 볼드 흰색 pill**(`bg-white`·`rounded-full`·`text-ink`). 저장소 URL은 `detail.repo`(프로젝트별 실제 레포로 연결), 미지정 시 대표 프로필(`github.com/JeonHyerim86`)로 폴백. 현재 매핑: 01→Athena_Backend, 02→homecare_BE, 03→de-final-project, 04→spear-pishing-mail-filter-project.
 
 ## 프로젝트 구조 (목표)
 

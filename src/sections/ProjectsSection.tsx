@@ -1,8 +1,9 @@
-import { useRef } from 'react'
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import { useRef, useState } from 'react'
+import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import type { MotionValue } from 'framer-motion'
+import { ArrowUpRight } from 'lucide-react'
 import FadeIn from '../components/FadeIn'
-import GhostButton from '../components/GhostButton'
+import ProjectModal from '../components/ProjectModal'
 import { projects } from '../data/projects'
 import type { Project } from '../data/projects'
 
@@ -14,25 +15,31 @@ function ProjectCard({
   progress,
   range,
   targetScale,
+  onOpen,
 }: {
   project: Project
   index: number
   progress: MotionValue<number>
   range: [number, number]
   targetScale: number
+  onOpen: (project: Project) => void
 }) {
   const reduce = useReducedMotion()
   // 섹션 전체 스크롤 진행도에 따라 아래(먼저 쌓인) 카드일수록 더 작아진다.
   const scale = useTransform(progress, range, [1, targetScale])
 
   const imgs = project.images
+  const hasDetail = Boolean(project.detail)
 
   return (
     // 카드마다 조금씩 낮은 위치에 sticky로 고정 → 위로 쌓이며 이전 카드가 상단에 살짝 보임.
     <div className="sticky" style={{ top: `calc(5.5rem + ${index * 34}px)` }}>
       <motion.div
         style={{ scale: reduce ? 1 : scale }}
-        className="mx-auto mb-6 w-full max-w-6xl origin-top rounded-[32px] border-2 border-mist bg-ink p-4 sm:mb-8 sm:rounded-[44px] sm:p-6 md:rounded-[56px] md:p-8"
+        onClick={hasDetail ? () => onOpen(project) : undefined}
+        className={`group mx-auto mb-6 w-full max-w-6xl origin-top rounded-[32px] border-2 border-mist bg-ink p-4 transition-colors sm:mb-8 sm:rounded-[44px] sm:p-6 md:rounded-[56px] md:p-8 ${
+          hasDetail ? 'cursor-pointer hover:border-white hover:bg-[#151518]' : ''
+        }`}
       >
         {/* 상단 행 */}
         <div className="mb-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 md:mb-7">
@@ -55,8 +62,20 @@ function ProjectCard({
               </h3>
             </div>
           </div>
-          {project.link ? (
-            <GhostButton label="Live Project" href={project.link} external />
+          {hasDetail ? (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation()
+                onOpen(project)
+              }}
+              aria-haspopup="dialog"
+              aria-label={`${project.name} 상세 보기`}
+              className="inline-flex items-center gap-1.5 rounded-full border-2 border-mist px-5 py-2.5 text-sm font-medium tracking-wide text-mist transition-colors duration-200 hover:bg-mist/10 sm:px-6"
+            >
+              자세히 보기
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </button>
           ) : null}
         </div>
 
@@ -143,6 +162,7 @@ export default function ProjectsSection() {
     offset: ['start start', 'end end'],
   })
   const total = projects.length
+  const [active, setActive] = useState<Project | null>(null)
 
   return (
     <section
@@ -168,9 +188,16 @@ export default function ProjectsSection() {
             progress={scrollYProgress}
             range={[i / total, 1]}
             targetScale={1 - (total - 1 - i) * 0.05}
+            onOpen={setActive}
           />
         ))}
       </div>
+
+      <AnimatePresence>
+        {active ? (
+          <ProjectModal key={active.number} project={active} onClose={() => setActive(null)} />
+        ) : null}
+      </AnimatePresence>
     </section>
   )
 }
