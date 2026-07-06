@@ -4,8 +4,9 @@ import { useReducedMotion } from 'framer-motion'
 
 // 움직이는 대상(targetRef) 뒤에 별처럼 반짝이는 파티클을 흩뿌리는 캔버스 레이어.
 // - 8방향 스파클(별) + 부드러운 글로우, additive 블렌딩, 또렷한 twinkle로 별처럼 반짝
-// - 세로 위치를 아래로 편향 샘플링해 "위→아래로 점점 더 많이" 나오는 밀도 그라데이션
-// - 은은한 중력으로 아래로 흐름, z는 캐릭터 "뒤"
+// - 캐릭터 몸통(중앙~상단) 주변에만 뿌리고, 하단 여백(캐릭터↔카드 사이 갭)에는 뿌리지 않는다
+// - 중력을 두지 않아 제자리에서 반짝이다 사라지는 "오라" 트레일 + 캔버스 하단 페이드로
+//   갭에 파티클이 고여 "불꽃(fireworks)"처럼 뭉치는 현상을 차단. z는 캐릭터 "뒤"
 // - prefers-reduced-motion·비-hover(터치) 환경에서는 비활성화
 interface ParticleTrailProps {
   targetRef: RefObject<HTMLElement | null>
@@ -130,17 +131,18 @@ export default function ParticleTrail({ targetRef, containerRef }: ParticleTrail
           if (speed > 0.7) {
             const count = Math.min(16, Math.floor(speed / 2.0) + 4)
             for (let i = 0; i < count; i++) {
-              // v: 0(위) → 1(아래). pow(<1)로 아래쪽에 더 강하게 몰아준다(하단 밀도↑).
-              const v = Math.pow(Math.random(), 0.4)
-              const spreadX = w * (0.26 + 0.28 * v) // 아래로 갈수록 가로로 더 퍼짐
+              // v: 0(위) → 1(아래). 삼각분포로 중앙 편향 후 상단 82%로 제한해
+              // 캐릭터 몸통 주변에 고르게 뿌리고, 머리카락 끝 아래(캐릭터↔카드 갭)로는 새지 않게 한다.
+              const v = (Math.random() + Math.random()) * 0.5 * 0.82
+              const spreadX = w * 0.4 // 세로 위치와 무관한 일정한 가로 퍼짐(하단 팬/분수 모양 방지)
               const spark = Math.random() < 0.3 // 소수만 반짝이는 별(은은하게)
               particles.push({
                 x: cx - dx * 0.2 + (Math.random() - 0.5) * spreadX,
                 y: top + v * h - dy * 0.2,
                 vx: -dx * 0.05 + (Math.random() - 0.5) * 0.3,
-                vy: -dy * 0.05 + (Math.random() - 0.5) * 0.3 + 0.15, // 살짝 아래로
+                vy: -dy * 0.05 + (Math.random() - 0.5) * 0.26, // 아래로 흘리지 않음(갭 고임 방지)
                 life: 1,
-                ttl: 950 + Math.random() * 950,
+                ttl: 850 + Math.random() * 850,
                 size: spark ? 8 + Math.random() * 11 : 5 + Math.random() * 9,
                 phase: Math.random() * Math.PI * 2,
                 tw: 1.6 + Math.random() * 3.4,
@@ -157,7 +159,7 @@ export default function ParticleTrail({ targetRef, containerRef }: ParticleTrail
       particles = particles.filter((p) => {
         p.life -= dt / p.ttl
         if (p.life <= 0) return false
-        p.vy += dt * 0.0011 // 은은한 중력 → 아래로 흐름
+        // 중력 없음: 아래로 흘러 하단(캐릭터↔카드 갭)에 고이는 대신 제자리에서 반짝이다 사라진다.
         p.x += p.vx * dt * 0.05
         p.y += p.vy * dt * 0.05
         return true
@@ -192,6 +194,12 @@ export default function ParticleTrail({ targetRef, containerRef }: ParticleTrail
       ref={canvasRef}
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 z-0"
+      style={{
+        // 하단 페이드: 갭(캐릭터↔카드)으로 새는 파티클을 배경으로 매끄럽게 사라지게 해
+        // "불꽃"처럼 뭉치는 현상을 원천 차단(에미션/중력 제거와 함께 이중 안전장치).
+        WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 70%, transparent 90%)',
+        maskImage: 'linear-gradient(to bottom, black 0%, black 70%, transparent 90%)',
+      }}
     />
   )
 }
