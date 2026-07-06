@@ -128,12 +128,12 @@ export default function ParticleTrail({ targetRef, containerRef }: ParticleTrail
           const dy = cy - last.y
           const speed = Math.hypot(dx, dy)
           if (speed > 0.7) {
-            const count = Math.min(20, Math.floor(speed / 1.6) + 6)
+            const count = Math.min(16, Math.floor(speed / 2.0) + 4)
             for (let i = 0; i < count; i++) {
-              // v: 0(위) → 1(아래). sqrt로 아래쪽 밀도를 높인다(그라데이션).
-              const v = Math.sqrt(Math.random())
+              // v: 0(위) → 1(아래). pow(<1)로 아래쪽에 더 강하게 몰아준다(하단 밀도↑).
+              const v = Math.pow(Math.random(), 0.4)
               const spreadX = w * (0.26 + 0.28 * v) // 아래로 갈수록 가로로 더 퍼짐
-              const spark = Math.random() < 0.5 // 절반은 반짝이는 별
+              const spark = Math.random() < 0.3 // 소수만 반짝이는 별(은은하게)
               particles.push({
                 x: cx - dx * 0.2 + (Math.random() - 0.5) * spreadX,
                 y: top + v * h - dy * 0.2,
@@ -141,7 +141,7 @@ export default function ParticleTrail({ targetRef, containerRef }: ParticleTrail
                 vy: -dy * 0.05 + (Math.random() - 0.5) * 0.3 + 0.15, // 살짝 아래로
                 life: 1,
                 ttl: 950 + Math.random() * 950,
-                size: spark ? 10 + Math.random() * 15 : 5 + Math.random() * 12,
+                size: spark ? 8 + Math.random() * 11 : 5 + Math.random() * 9,
                 phase: Math.random() * Math.PI * 2,
                 tw: 1.6 + Math.random() * 3.4,
                 spark,
@@ -167,9 +167,9 @@ export default function ParticleTrail({ targetRef, containerRef }: ParticleTrail
       ctx.globalCompositeOperation = 'lighter'
       for (const p of particles) {
         const s01 = 0.5 + 0.5 * Math.sin(p.phase + t * 0.011 * p.tw)
-        // 별은 날카롭게 번쩍(twinkle), 글로우는 은은하게
-        const tw = p.spark ? Math.pow(s01, 4) : 0.35 + 0.6 * s01
-        ctx.globalAlpha = Math.max(0, p.life) * (p.spark ? 1 : 0.5) * tw
+        // 별은 부드럽게 반짝이되 최저 밝기 바닥을 둬 사라지지 않게, 글로우는 잔잔하게
+        const tw = p.spark ? 0.25 + 0.6 * Math.pow(s01, 2) : 0.4 + 0.45 * s01
+        ctx.globalAlpha = Math.max(0, p.life) * (p.spark ? 0.7 : 0.48) * tw
         const s = p.size * (0.45 + p.life * 0.6)
         const sprite = p.spark ? sparkleSprite : glowSprites[p.tint]
         ctx.drawImage(sprite, p.x - s / 2, p.y - s / 2, s, s)
