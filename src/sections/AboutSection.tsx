@@ -32,7 +32,10 @@ export default function AboutSection() {
               key={group.label}
               className="rounded-2xl border border-mist/15 bg-white/[0.02] p-5 sm:p-6"
             >
-              <dt className="mb-2 font-display text-sm uppercase tracking-widest text-mist/50 sm:text-base">
+              <dt className="mb-2 flex items-center gap-2 font-display text-sm uppercase tracking-widest text-mist/50 sm:text-base">
+                <span aria-hidden className="text-lg leading-none sm:text-xl">
+                  {group.icon}
+                </span>
                 {group.label}
               </dt>
               <dd className="space-y-1">

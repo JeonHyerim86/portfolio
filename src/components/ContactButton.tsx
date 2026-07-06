@@ -96,8 +96,8 @@ export default function ContactButton({
           />
         </svg>
       </span>
-      {/* 라벨 캡션 */}
-      <span className="font-semibold uppercase tracking-[0.2em] text-sm transition-opacity duration-150 group-hover:opacity-70 sm:text-base md:text-lg">
+      {/* 라벨 캡션 — "Backend Developer" 태그라인과 같은 글씨체(font-display=Kanit, bold, 넓은 자간). 크기는 유지 */}
+      <span className="font-display font-bold uppercase tracking-[0.22em] text-sm transition-opacity duration-150 group-hover:opacity-70 sm:text-base sm:tracking-[0.32em] md:text-lg md:tracking-[0.4em]">
         {label}
       </span>
     </a>
