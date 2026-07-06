@@ -94,7 +94,7 @@ export default function HeroSection() {
           (센터링은 래퍼가, 커서 추종은 Magnet이 담당) */}
       <div
         ref={charRef}
-        className="absolute bottom-0 left-1/2 z-10 w-[280px] -translate-x-1/2 sm:w-[380px] md:w-[440px] lg:w-[500px]"
+        className="absolute bottom-0 left-1/2 z-10 w-[240px] -translate-x-1/2 sm:w-[320px] md:w-[380px] lg:w-[420px]"
       >
         {/* 접지 그림자: 바닥에 고정(틸트/이동에 안 딸려감). 부유와 동기화해 캐릭터가
             뜨면 작아지고 옅어져 공간감을 준다. 다크 배경이라 순검정 소프트 타원. */}

@@ -141,15 +141,6 @@ function ProjectCard({
             <p className="max-w-[52ch] break-keep leading-relaxed text-mist/80">{project.summary}</p>
           </div>
         )}
-
-        {/* 기술 스택 */}
-        <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-1 md:mt-6">
-          {project.tech.map((t) => (
-            <li key={t} className="text-xs text-mist/50 sm:text-sm">
-              {t}
-            </li>
-          ))}
-        </ul>
       </motion.div>
     </div>
   )
