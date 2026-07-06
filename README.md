@@ -4,9 +4,7 @@
  
 채용 담당자가 **3분 이내**에 핵심 역량·대표 프로젝트·연락처를 파악할 수 있도록 설계한 싱글 페이지 포트폴리오입니다.
 다크 테마와 대형 그라디언트 타이포, 스크롤 기반 모션으로 백엔드 역량과 함께 프론트엔드 디테일 감각을 전달합니다.
- 
-**🔗 Live Demo — [portfolio-hrjeon.vercel.app](portfolio-nine-fawn-n9etd0dwhh.vercel.app)**
- 
+
 
 ## 🛠 기술 스택
  
