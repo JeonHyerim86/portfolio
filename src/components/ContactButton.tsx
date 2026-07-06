@@ -63,7 +63,7 @@ export default function ContactButton({
           shapeRendering="crispEdges"
           fill="url(#ctaRainbow)"
           aria-hidden="true"
-          className="h-20 w-[52px] animate-[cursor-rainbow_3.5s_linear_infinite] motion-reduce:animate-none sm:h-24 sm:w-[62px] md:h-28 md:w-[74px]"
+          className="h-16 w-[42px] animate-[cursor-rainbow_3.5s_linear_infinite] motion-reduce:animate-none sm:h-20 sm:w-[52px] md:h-24 md:w-[62px]"
         >
           <defs>
             <linearGradient

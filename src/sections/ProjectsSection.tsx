@@ -102,7 +102,7 @@ function ProjectCard({
                   src={src}
                   alt={`${project.alt} ${i + 1}`}
                   loading="lazy"
-                  className="aspect-[16/10] w-full rounded-[20px] object-cover sm:rounded-[28px]"
+                  className="aspect-[7/3] w-full rounded-[20px] object-cover sm:rounded-[28px]"
                 />
               ))}
             </div>
@@ -111,7 +111,7 @@ function ProjectCard({
                 src={imgs[2]}
                 alt={`${project.alt} 대표`}
                 loading="lazy"
-                className="aspect-[4/3.4] w-full rounded-[20px] object-cover sm:rounded-[28px]"
+                className="aspect-[16/10] w-full rounded-[20px] object-cover sm:rounded-[28px]"
               />
             </div>
           </div>
@@ -141,15 +141,6 @@ function ProjectCard({
             <p className="max-w-[52ch] break-keep leading-relaxed text-mist/80">{project.summary}</p>
           </div>
         )}
-
-        {/* 기술 스택 */}
-        <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-1 md:mt-6">
-          {project.tech.map((t) => (
-            <li key={t} className="text-xs text-mist/50 sm:text-sm">
-              {t}
-            </li>
-          ))}
-        </ul>
       </motion.div>
     </div>
   )
