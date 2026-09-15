@@ -8,6 +8,7 @@ dist/
 .vite/
 
 # Claude Code local settings & tooling (skills / agents — not portfolio source)
+CLAUDE.md
 .claude/
 .agents/
 skills-lock.json
