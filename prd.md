@@ -95,14 +95,14 @@
 
 ### 6.3 자기소개 (About)
 - **개발 철학 / 소개문**: PDF 상단 소개 문단 활용("겉으로 보이는 기능보다 그 안에서 서비스를 단단하게 만드는 것 …").
-- **핵심 역량**(불릿):
-  - Spring Boot 기반 서비스의 백엔드 성능 개선·모니터링 경험
-  - ERD 설계부터 핵심 서비스 구현까지 백엔드 전반 주도 경험
-  - Swagger·Notion 기반 문서화로 협업 효율 향상
-  - Java·Python·C·C++ 등 다양한 언어 경험 → 새 기술 스택 습득에 유리
-  - AWS·Airflow·Docker 활용 경험 기반 클라우드 지식
-  - Claude Code 기반 AI 주도 개발(기획→배포)과 Claude API 연동 LLM 기능 구현 경험
-- **스킬**: Java, Kotlin, Spring Boot, Python, MySQL, WebSocket, AWS, Docker, GitHub Actions, Git, RESTful API, Claude Code (시각적 배지/그룹핑).
+- **핵심 역량**(불릿, EXPERTISE 01~06 — 원티드 이력서 소개란 기준):
+  - 백엔드 성능 최적화 — 부하 테스트 검증 기반 개선 (처리량 250%↑ · CPU 12%↓ · TPS 50%↑)
+  - 백엔드 설계·구현 주도 — ERD 설계부터 핵심 서비스 구현까지 (34개 테이블 단독 설계·구현)
+  - 인프라·배포 자동화 — AWS(EC2·RDS·S3) + GitHub Actions CI/CD 직접 구축
+  - 서비스 기획·문제 해결 — 현장 인터뷰 기반 요구사항 도출, 해커톤 최우수상 2회
+  - AI 활용 개발 — Claude Code 기반 AI 주도 개발(기획→배포), Claude API LLM 기능 구현
+  - 문서화·협업 — Swagger·Notion 문서화, 브랜치 전략·PR 리뷰
+- **스킬**: Java, Spring Boot, Python, MySQL, AWS, Docker, GitHub Actions, Git, RESTful API, Claude Code (시각적 배지/그룹핑).
 - **학력**: 광운대학교 컴퓨터정보공학부 정보통신학전공 (2020.03–2025.02 졸업).
 - **수상·자격증·기타** (타임라인 또는 리스트):
   - 제7회 KDT 해커톤 **최우수상** (2025.09)

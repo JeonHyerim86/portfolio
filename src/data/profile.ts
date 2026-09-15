@@ -14,8 +14,8 @@ export const profile = {
   portrait: './3d-profile.png',
   // 개발 철학 / 소개문 (PRD §6.3 소개문 · 슬로건 · 핵심 역량 기반)
   intro:
-    '겉으로 보이는 기능보다, 그 안에서 서비스를 단단하게 만드는 일에 집중합니다. Spring Boot·Kotlin 기반 백엔드 설계와 성능 개선에서 출발해, 현장 인터뷰로 문제를 정의하는 기획으로 해커톤 최우수상을 두 번 받았고, 이제는 Claude Code·LLM을 활용한 AI 주도 개발까지 — 단단한 백엔드 위에 기획과 AI 역량을 더해가는 개발자입니다.',
-  skills: ['Java', 'Kotlin', 'Spring Boot', 'Python', 'MySQL', 'WebSocket', 'AWS', 'Docker', 'GitHub Actions', 'Git', 'RESTful API', 'Claude Code'],
+    '겉으로 보이는 기능보다, 그 안에서 서비스를 단단하게 만드는 일에 집중합니다. Spring Boot 기반 백엔드 설계와 성능 개선에서 출발해, 현장 인터뷰로 문제를 정의하는 기획으로 해커톤 최우수상을 두 번 받았고, 이제는 Claude Code·LLM을 활용한 AI 주도 개발까지 — 단단한 백엔드 위에 기획과 AI 역량을 더해가는 개발자입니다.',
+  skills: ['Java', 'Spring Boot', 'Python', 'MySQL', 'AWS', 'Docker', 'GitHub Actions', 'Git', 'RESTful API', 'Claude Code'],
   highlights: [
     {
       icon: '🎓',
