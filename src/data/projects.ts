@@ -48,7 +48,7 @@ export const projects: Project[] = [
     period: '2026.08 – 2026.09',
     summary:
       'LLM이 문항을 만들고 참가자가 실시간으로 함께 풀며 AI 첨삭·라이브 랭킹을 받는 학습 플랫폼의 백엔드·인프라를 단독 개발했습니다.',
-    highlights: ['40여 명 동시 참여 시연 성공', 'LLM 문항 생성 파이프라인', '기획→배포 10일 완성'],
+    highlights: ['40여 명 동시 참여 시연 성공', 'LLM 문항 생성 파이프라인'],
     tech: ['Kotlin', 'Spring Boot', 'MySQL', 'WebSocket(STOMP)', 'AWS', 'GitHub Actions', 'Claude API'],
     // 카드에는 gallery 앞 3장을 순서 그대로 노출한다 (1·2·3번 = 홈 → 문항 생성 → 실시간 세션)
     images: ['./passmate-home.png', './passmate-editor.png', './passmate-live.png'],
@@ -80,7 +80,7 @@ export const projects: Project[] = [
         'Claude Code',
       ],
       overview:
-        '호스트가 주제·유형·난이도를 정하면 LLM이 문항을 생성하고, 참가자가 PIN·QR로 입장해 실시간으로 함께 풀며 AI 첨삭과 라이브 랭킹을 받는 학습 플랫폼입니다. 백엔드와 AWS 인프라 전체를 단독으로 맡고, Claude Code를 기획부터 배포까지 전 과정에 활용해 10일 만에 MVP를 완성했습니다.',
+        '호스트가 주제·유형·난이도를 정하면 LLM이 문항을 생성하고, 참가자가 PIN·QR로 입장해 실시간으로 함께 풀며 AI 첨삭과 라이브 랭킹을 받는 학습 플랫폼입니다. 백엔드와 AWS 인프라 전체를 단독으로 맡고, Claude Code를 기획부터 배포까지 전 과정에 활용해 MVP를 완성했습니다.',
       contributions: [
         {
           group: 'Backend',
@@ -102,7 +102,7 @@ export const projects: Project[] = [
       ],
       achievements: [
         '최종 발표에서 40여 명 동시 접속 참여형 시연 성공 — 설계 기준(20명)의 2배 규모를 실사용으로 검증',
-        'Claude Code 기반 AI 주도 개발로 기획→배포 10일 완성',
+        'Claude Code 기반 AI 주도 개발로 기획부터 배포까지 전 과정 주도',
         'merge 즉시 배포되는 완전 자동화 CI/CD 파이프라인 구축',
         'LLM 응답 검증·복구 설계로 안정적인 문항 생성 흐름 확보',
       ],
