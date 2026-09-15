@@ -4,6 +4,7 @@ import type { MotionValue } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import FadeIn from '../components/FadeIn'
 import ProjectModal from '../components/ProjectModal'
+import ImageLightbox from '../components/ImageLightbox'
 import { projects } from '../data/projects'
 import type { Project } from '../data/projects'
 
@@ -16,6 +17,7 @@ function ProjectCard({
   range,
   targetScale,
   onOpen,
+  onImageOpen,
 }: {
   project: Project
   index: number
@@ -23,6 +25,7 @@ function ProjectCard({
   range: [number, number]
   targetScale: number
   onOpen: (project: Project) => void
+  onImageOpen: (project: Project, imageIndex: number) => void
 }) {
   const reduce = useReducedMotion()
   // 섹션 전체 스크롤 진행도에 따라 아래(먼저 쌓인) 카드일수록 더 작아진다.
@@ -36,10 +39,7 @@ function ProjectCard({
     <div className="sticky" style={{ top: `calc(5.5rem + ${index * 34}px)` }}>
       <motion.div
         style={{ scale: reduce ? 1 : scale }}
-        onClick={hasDetail ? () => onOpen(project) : undefined}
-        className={`group mx-auto mb-6 w-full max-w-6xl origin-top rounded-[32px] border-2 border-mist bg-ink p-4 transition-colors sm:mb-8 sm:rounded-[44px] sm:p-6 md:rounded-[56px] md:p-8 ${
-          hasDetail ? 'cursor-pointer hover:border-white hover:bg-[#151518]' : ''
-        }`}
+        className="group mx-auto mb-6 w-full max-w-6xl origin-top rounded-[32px] border-2 border-mist bg-ink p-4 sm:mb-8 sm:rounded-[44px] sm:p-6 md:rounded-[56px] md:p-8"
       >
         {/* 상단 행 */}
         <div className="mb-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 md:mb-7">
@@ -65,10 +65,7 @@ function ProjectCard({
           {hasDetail ? (
             <button
               type="button"
-              onClick={(e) => {
-                e.stopPropagation()
-                onOpen(project)
-              }}
+              onClick={() => onOpen(project)}
               aria-haspopup="dialog"
               aria-label={`${project.name} 상세 보기`}
               className="inline-flex items-center gap-1.5 rounded-full border-2 border-mist px-5 py-2.5 text-sm font-medium tracking-wide text-mist transition-colors duration-200 hover:bg-mist/10 sm:px-6"
@@ -97,45 +94,73 @@ function ProjectCard({
           <div className="flex gap-3 sm:gap-4">
             <div className="flex w-2/5 flex-col gap-3 sm:gap-4">
               {[imgs[0], imgs[1]].map((src, i) => (
-                <img
+                <button
                   key={src}
-                  src={src}
-                  alt={`${project.alt} ${i + 1}`}
-                  loading="lazy"
-                  className="aspect-[7/3] w-full rounded-[20px] object-cover sm:rounded-[28px]"
-                />
+                  type="button"
+                  onClick={() => onImageOpen(project, i)}
+                  aria-label={`${project.alt} ${i + 1} 크게 보기`}
+                  className="block w-full cursor-zoom-in overflow-hidden rounded-[20px] sm:rounded-[28px]"
+                >
+                  <img
+                    src={src}
+                    alt={`${project.alt} ${i + 1}`}
+                    loading="lazy"
+                    className="aspect-[7/3] w-full object-cover transition-transform duration-300 hover:scale-[1.03]"
+                  />
+                </button>
               ))}
             </div>
             <div className="w-3/5">
-              <img
-                src={imgs[2]}
-                alt={`${project.alt} 대표`}
-                loading="lazy"
-                className="aspect-[16/10] w-full rounded-[20px] object-cover sm:rounded-[28px]"
-              />
+              <button
+                type="button"
+                onClick={() => onImageOpen(project, 2)}
+                aria-label={`${project.alt} 대표 크게 보기`}
+                className="block w-full cursor-zoom-in overflow-hidden rounded-[20px] sm:rounded-[28px]"
+              >
+                <img
+                  src={imgs[2]}
+                  alt={`${project.alt} 대표`}
+                  loading="lazy"
+                  className="aspect-[16/10] w-full object-cover transition-transform duration-300 hover:scale-[1.03]"
+                />
+              </button>
             </div>
           </div>
         ) : imgs.length === 2 ? (
           // 2장: 동일 너비·높이 2열
           <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {imgs.map((src, i) => (
-              <img
+              <button
                 key={src}
-                src={src}
-                alt={`${project.alt} ${i + 1}`}
-                loading="lazy"
-                className="aspect-[16/10] w-full rounded-[20px] object-cover sm:rounded-[28px]"
-              />
+                type="button"
+                onClick={() => onImageOpen(project, i)}
+                aria-label={`${project.alt} ${i + 1} 크게 보기`}
+                className="block w-full cursor-zoom-in overflow-hidden rounded-[20px] sm:rounded-[28px]"
+              >
+                <img
+                  src={src}
+                  alt={`${project.alt} ${i + 1}`}
+                  loading="lazy"
+                  className="aspect-[16/10] w-full object-cover transition-transform duration-300 hover:scale-[1.03]"
+                />
+              </button>
             ))}
           </div>
         ) : imgs.length === 1 ? (
           // 1장: 전체 너비 단일 이미지
-          <img
-            src={imgs[0]}
-            alt={`${project.alt} 대표`}
-            loading="lazy"
-            className="aspect-[16/7] w-full rounded-[20px] object-cover sm:rounded-[28px]"
-          />
+          <button
+            type="button"
+            onClick={() => onImageOpen(project, 0)}
+            aria-label={`${project.alt} 대표 크게 보기`}
+            className="block w-full cursor-zoom-in overflow-hidden rounded-[20px] sm:rounded-[28px]"
+          >
+            <img
+              src={imgs[0]}
+              alt={`${project.alt} 대표`}
+              loading="lazy"
+              className="aspect-[16/7] w-full object-cover transition-transform duration-300 hover:scale-[1.03]"
+            />
+          </button>
         ) : (
           <div className="rounded-[20px] border border-mist/20 bg-white/[0.02] p-6 sm:rounded-[28px] sm:p-8">
             <p className="max-w-[52ch] break-keep leading-relaxed text-mist/80">{project.summary}</p>
@@ -154,6 +179,9 @@ export default function ProjectsSection() {
   })
   const total = projects.length
   const [active, setActive] = useState<Project | null>(null)
+  const [lightbox, setLightbox] = useState<{ images: string[]; alt: string; index: number } | null>(
+    null,
+  )
 
   return (
     <section
@@ -180,6 +208,9 @@ export default function ProjectsSection() {
             range={[i / total, 1]}
             targetScale={1 - (total - 1 - i) * 0.05}
             onOpen={setActive}
+            onImageOpen={(p, imageIndex) =>
+              setLightbox({ images: p.images, alt: p.alt, index: imageIndex })
+            }
           />
         ))}
       </div>
@@ -187,6 +218,18 @@ export default function ProjectsSection() {
       <AnimatePresence>
         {active ? (
           <ProjectModal key={active.number} project={active} onClose={() => setActive(null)} />
+        ) : null}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {lightbox ? (
+          <ImageLightbox
+            key="lightbox"
+            images={lightbox.images}
+            alt={lightbox.alt}
+            initialIndex={lightbox.index}
+            onClose={() => setLightbox(null)}
+          />
         ) : null}
       </AnimatePresence>
     </section>
