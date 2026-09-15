@@ -36,4 +36,10 @@ export const expertise: ExpertiseItem[] = [
     description:
       'AWS·Airflow·Docker를 활용한 데이터 파이프라인과 클라우드 운영 경험을 갖췄습니다.',
   },
+  {
+    number: '06',
+    name: 'AI 활용 개발',
+    description:
+      'Claude Code로 기획부터 배포까지 개발 과정을 이끌고, Claude API 기반 LLM 기능을 직접 서비스에 구현합니다.',
+  },
 ]

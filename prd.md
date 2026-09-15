@@ -72,7 +72,7 @@
 ### 6.1 홈 (Hero)
 - **필수 요소**: 이름(전혜림), 직무(백엔드 개발자), 한 줄 슬로건, 프로필 이미지(`ref/hyerim.jpeg`).
 - **슬로건**: "서비스의 겉보다 속을, 더 좋은 서비스를 위해 고민하는 개발자"
-- **핵심 키워드 태그**: `Spring Boot` `백엔드 성능 최적화` `데이터 파이프라인` `Docker/CI·CD`
+- **핵심 키워드 태그**: `Spring Boot` `백엔드 성능 최적화` `AI 활용 개발` `데이터 파이프라인` `Docker/CI·CD`
 - **메인 CTA**: "포트폴리오 보기", "연락하기" 버튼 → 해당 섹션으로 스무스 스크롤.
 - **인터랙션**: 패럴랙스 배경, 마우스 추적 파티클/잔상 효과(아래 §7).
 
@@ -83,12 +83,14 @@
 
 | # | 프로젝트 | 기간 | 핵심 성과 | 대표 기술 | 이미지 자산 |
 |---|----------|------|-----------|-----------|-------------|
-| 1 | **크라우드 펀딩 E-commerce 플랫폼** (goorm PROFECT 2기) | 2025.04–2025.06 | 실시간 알림 초당 최대 요청 **250%↑**, CPU **12%↓**, **TPS 50%↑** | Java, Spring Boot, MySQL, QueryDSL, FCM, JMeter, GitHub Actions | `이커머스(1~4).png` |
-| 2 | **재가요양 자동 인력 배정 플랫폼** (제7회 KDT 해커톤 **최우수상**) | 2025.06–2025.09 | 현장 인터뷰 기반 설계로 심사 최우수상, 확장 가능한 ERD | Java, Spring Boot, PostgreSQL, Docker, GitHub Actions | `해커톤(1~3).png` |
-| 3 | **주식 시장 트렌드 분석 대시보드** | 2024.12–2025.01 | Airflow 기반 수집→정제→적재 자동화, 일 단위 키워드 리포트 | Python, Airflow, Docker, AWS(EC2·S3·Redshift), Superset | `de(1).jpg`, `de(2).png` |
-| 4 | **AI 스피어피싱 메일 탐지** (대학 캡스톤) | 2022.07–2023.02 | 탐지 정확도 **약 91.34%** 달성, 전처리 파이프라인 자동화 | Python, BERT, Decision Tree, 데이터 크롤링·전처리 | (텍스트 기반) |
+| 1 | **AI 실시간 문제풀이 플랫폼 PassMate** (청년취업사관학교 새싹 SeSAC) | 2026.08–2026.09 | 40여 명 동시 참여형 시연 성공, LLM 문항 생성 파이프라인, 기획→배포 **10일** 완성 (백엔드·AWS 인프라 단독) | Kotlin, Spring Boot, MySQL, WebSocket(STOMP), AWS, GitHub Actions, Claude API, Claude Code | (추후 추가 — `passmate-*.png`) |
+| 2 | **크라우드 펀딩 E-commerce 플랫폼** (goorm PROFECT 2기) | 2025.04–2025.06 | 실시간 알림 초당 최대 요청 **250%↑**, CPU **12%↓**, **TPS 50%↑** | Java, Spring Boot, MySQL, QueryDSL, FCM, JMeter, GitHub Actions | `이커머스(1~4).png` |
+| 3 | **재가요양 자동 인력 배정 플랫폼** (제7회 KDT 해커톤 **최우수상**) | 2025.06–2025.09 | 현장 인터뷰 기반 설계로 심사 최우수상, 확장 가능한 ERD | Java, Spring Boot, PostgreSQL, Docker, GitHub Actions | `해커톤(1~3).png` |
+| 4 | **주식 시장 트렌드 분석 대시보드** | 2024.12–2025.01 | Airflow 기반 수집→정제→적재 자동화, 일 단위 키워드 리포트 | Python, Airflow, Docker, AWS(EC2·S3·Redshift), Superset | `de(1).jpg`, `de(2).png` |
+| 5 | **AI 스피어피싱 메일 탐지** (대학 캡스톤) | 2022.07–2023.02 | 탐지 정확도 **약 91.34%** 달성, 전처리 파이프라인 자동화 | Python, BERT, Decision Tree, 데이터 크롤링·전처리 | (텍스트 기반) |
 
-> 정렬 우선순위: 최신·임팩트(수상/정량 성과) 순. 1·2번을 대표 프로젝트로 상단 강조.
+> 정렬 우선순위: 최신·임팩트(수상/정량 성과) 순. 1번(PassMate)을 대표 프로젝트로 상단 강조.
+> PassMate 이미지 자산은 추후 추가 예정 — 카드 `images: []` 상태로 텍스트 기반 렌더(캡스톤과 동일 패턴), `public/passmate-*.png` 추가 시 배열에 채운다.
 > 각 카드 상세에는 PDF의 **[역할]·[성과]·[협업]·[기술]** 항목을 구조화하여 표기.
 
 ### 6.3 자기소개 (About)
@@ -99,10 +101,13 @@
   - Swagger·Notion 기반 문서화로 협업 효율 향상
   - Java·Python·C·C++ 등 다양한 언어 경험 → 새 기술 스택 습득에 유리
   - AWS·Airflow·Docker 활용 경험 기반 클라우드 지식
-- **스킬**: Java, Spring Boot, Python, MySQL, Git, RESTful API, Docker (시각적 배지/그룹핑).
+  - Claude Code 기반 AI 주도 개발(기획→배포)과 Claude API 연동 LLM 기능 구현 경험
+- **스킬**: Java, Kotlin, Spring Boot, Python, MySQL, WebSocket, AWS, Docker, GitHub Actions, Git, RESTful API, Claude Code (시각적 배지/그룹핑).
 - **학력**: 광운대학교 컴퓨터정보공학부 정보통신학전공 (2020.03–2025.02 졸업).
 - **수상·자격증·기타** (타임라인 또는 리스트):
   - 제7회 KDT 해커톤 **최우수상** (2025.09)
+  - 제4회 블레이버스 MVP 개발 해커톤 **최우수상** (2026.08, Blaybus 주최 '2026 스타트업 영 그라운드 MVP 개발 해커톤' · 키오브릿지 부문 · 팀 23c)
+  - 청년취업사관학교 새싹(SeSAC) 클로드코드 마스터 포트폴리오 취창업 과정 **수료** (2026.06–2026.09, 371시간, 서울경제진흥원)
   - 정보처리기사 (2025.09) · SQLD (2025.04) · ADsP (2025.11)
   - 어학: OPIc IM2 (2025.09) — 영어 일상 회화
 
