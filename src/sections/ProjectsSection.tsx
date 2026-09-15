@@ -25,7 +25,7 @@ function ProjectCard({
   range: [number, number]
   targetScale: number
   onOpen: (project: Project) => void
-  onImageOpen: (project: Project, imageIndex: number) => void
+  onImageOpen: (project: Project, src: string) => void
 }) {
   const reduce = useReducedMotion()
   // 섹션 전체 스크롤 진행도에 따라 아래(먼저 쌓인) 카드일수록 더 작아진다.
@@ -97,7 +97,7 @@ function ProjectCard({
                 <button
                   key={src}
                   type="button"
-                  onClick={() => onImageOpen(project, i)}
+                  onClick={() => onImageOpen(project, src)}
                   aria-label={`${project.alt} ${i + 1} 크게 보기`}
                   className="block w-full cursor-zoom-in overflow-hidden rounded-[20px] sm:rounded-[28px]"
                 >
@@ -113,7 +113,7 @@ function ProjectCard({
             <div className="w-3/5">
               <button
                 type="button"
-                onClick={() => onImageOpen(project, 2)}
+                onClick={() => onImageOpen(project, imgs[2])}
                 aria-label={`${project.alt} 대표 크게 보기`}
                 className="block w-full cursor-zoom-in overflow-hidden rounded-[20px] sm:rounded-[28px]"
               >
@@ -133,7 +133,7 @@ function ProjectCard({
               <button
                 key={src}
                 type="button"
-                onClick={() => onImageOpen(project, i)}
+                onClick={() => onImageOpen(project, src)}
                 aria-label={`${project.alt} ${i + 1} 크게 보기`}
                 className="block w-full cursor-zoom-in overflow-hidden rounded-[20px] sm:rounded-[28px]"
               >
@@ -150,7 +150,7 @@ function ProjectCard({
           // 1장: 전체 너비 단일 이미지
           <button
             type="button"
-            onClick={() => onImageOpen(project, 0)}
+            onClick={() => onImageOpen(project, imgs[0])}
             aria-label={`${project.alt} 대표 크게 보기`}
             className="block w-full cursor-zoom-in overflow-hidden rounded-[20px] sm:rounded-[28px]"
           >
@@ -208,9 +208,12 @@ export default function ProjectsSection() {
             range={[i / total, 1]}
             targetScale={1 - (total - 1 - i) * 0.05}
             onOpen={setActive}
-            onImageOpen={(p, imageIndex) =>
-              setLightbox({ images: p.images, alt: p.alt, index: imageIndex })
-            }
+            onImageOpen={(p, src) => {
+              // 뷰어는 gallery(있으면) 전체를 넘겨 보고, 클릭한 사진에서 시작한다.
+              const gallery = p.gallery ?? p.images
+              const start = gallery.indexOf(src)
+              setLightbox({ images: gallery, alt: p.alt, index: start === -1 ? 0 : start })
+            }}
           />
         ))}
       </div>

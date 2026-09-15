@@ -30,7 +30,11 @@ export interface Project {
   summary: string
   highlights: string[]
   tech: string[]
+  // 카드에 보이는 사진(최대 3장). 레이아웃이 장수에 맞춰 달라진다.
   images: string[]
+  // 사진 뷰어에서 넘겨 볼 전체 사진. 생략하면 images를 그대로 쓴다.
+  // images의 각 사진은 이 목록에 포함되어야 클릭 위치가 맞는다.
+  gallery?: string[]
   alt: string
   link?: string
   detail?: ProjectDetail
@@ -46,7 +50,16 @@ export const projects: Project[] = [
       'LLM이 문항을 만들고 참가자가 실시간으로 함께 풀며 AI 첨삭·라이브 랭킹을 받는 학습 플랫폼의 백엔드·인프라를 단독 개발했습니다.',
     highlights: ['40여 명 동시 참여 시연 성공', 'LLM 문항 생성 파이프라인', '기획→배포 10일 완성'],
     tech: ['Kotlin', 'Spring Boot', 'MySQL', 'WebSocket(STOMP)', 'AWS', 'GitHub Actions', 'Claude API'],
-    images: ['./passmate-editor.png', './passmate-report.png', './passmate-live.png'],
+    // 카드에는 gallery 앞 3장을 순서 그대로 노출한다 (1·2·3번 = 홈 → 문항 생성 → 실시간 세션)
+    images: ['./passmate-home.png', './passmate-editor.png', './passmate-live.png'],
+    // 뷰어에서는 서비스 흐름 순서대로 5장 전부 넘겨 볼 수 있다.
+    gallery: [
+      './passmate-home.png',
+      './passmate-editor.png',
+      './passmate-live.png',
+      './passmate-mobile.png',
+      './passmate-report.png',
+    ],
     alt: 'AI 실시간 문제풀이 플랫폼 PassMate 화면',
     detail: {
       team: '총 4인 · Mobile 1 / FE 1 / BE·Infra 1 / Design 1',
