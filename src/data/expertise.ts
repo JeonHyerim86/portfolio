@@ -15,9 +15,9 @@ export const expertise: ExpertiseItem[] = [
   },
   {
     number: '02',
-    name: '백엔드 설계·구현 주도',
+    name: '서비스 기획·문제 해결',
     description:
-      'ERD 설계부터 핵심 서비스 구현까지 백엔드 전반을 주도합니다. 34개 테이블 규모의 서비스 백엔드를 단독으로 설계·구현한 경험이 있습니다.',
+      '현장 인터뷰로 요구사항을 도출하고, 이를 확장 가능한 ERD와 서비스 흐름으로 설계해 구현까지 이어갑니다. 이 접근으로 KDT 해커톤과 블레이버스 MVP 해커톤에서 최우수상을 받았습니다.',
   },
   {
     number: '03',
@@ -27,18 +27,12 @@ export const expertise: ExpertiseItem[] = [
   },
   {
     number: '04',
-    name: '서비스 기획·문제 해결',
-    description:
-      '현장 인터뷰로 요구사항을 도출하고 서비스로 구현합니다. 이 접근으로 KDT 해커톤과 블레이버스 MVP 해커톤에서 최우수상을 받았습니다.',
-  },
-  {
-    number: '05',
     name: 'AI 활용 개발',
     description:
       'Claude Code로 기획부터 배포까지 개발 과정을 이끌고, Claude API 기반 LLM 기능을 직접 서비스에 구현합니다.',
   },
   {
-    number: '06',
+    number: '05',
     name: '문서화·협업',
     description:
       'Swagger·Notion 기반 문서화와 브랜치 전략·PR 리뷰로 팀의 협업 효율을 높입니다.',
