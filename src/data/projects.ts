@@ -48,7 +48,7 @@ export const projects: Project[] = [
     period: '2026.08 – 2026.09',
     summary:
       'LLM이 문항을 만들고 참가자가 실시간으로 함께 풀며 AI 첨삭·라이브 랭킹을 받는 학습 플랫폼의 백엔드·인프라를 단독 개발했습니다.',
-    highlights: ['40여 명 동시 참여 시연 성공', 'LLM 문항 생성 파이프라인'],
+    highlights: ['AI Agent 활용 능력', '40여 명 동시 참여 시연 성공', 'LLM 문항 생성 파이프라인'],
     tech: ['Kotlin', 'Spring Boot', 'MySQL', 'WebSocket(STOMP)', 'AWS', 'GitHub Actions', 'Claude API'],
     // 카드에는 gallery 앞 3장을 순서 그대로 노출한다 (1·2·3번 = 홈 → 문항 생성 → 실시간 세션)
     images: ['./passmate-home.png', './passmate-editor.png', './passmate-live.png'],
