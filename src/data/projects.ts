@@ -39,6 +39,82 @@ export interface Project {
 export const projects: Project[] = [
   {
     number: '01',
+    name: 'AI 실시간 문제풀이 플랫폼 PassMate',
+    category: '청년취업사관학교 새싹(SeSAC)',
+    period: '2026.08 – 2026.09',
+    summary:
+      'LLM이 문항을 만들고 참가자가 실시간으로 함께 풀며 AI 첨삭·라이브 랭킹을 받는 학습 플랫폼의 백엔드·인프라를 단독 개발했습니다.',
+    highlights: ['40여 명 동시 참여 시연 성공', 'LLM 문항 생성 파이프라인', '기획→배포 10일 완성'],
+    tech: ['Kotlin', 'Spring Boot', 'MySQL', 'WebSocket(STOMP)', 'AWS', 'GitHub Actions', 'Claude API'],
+    images: ['./passmate-editor.png', './passmate-report.png', './passmate-live.png'],
+    alt: 'AI 실시간 문제풀이 플랫폼 PassMate 화면',
+    detail: {
+      team: '총 4인 · Mobile 1 / FE 1 / BE·Infra 1 / Design 1',
+      role: 'Backend · Infra',
+      repo: 'https://github.com/Sesac-TeamProject/Passmate-Backend',
+      techStack: [
+        'Kotlin',
+        'Spring Boot',
+        'Spring Data JPA',
+        'MySQL',
+        'Flyway',
+        'WebSocket(STOMP)',
+        'Docker',
+        'GitHub Actions',
+        'AWS EC2·RDS·S3',
+        'Claude API',
+        'PortOne',
+        'Claude Code',
+      ],
+      overview:
+        '호스트가 주제·유형·난이도를 정하면 LLM이 문항을 생성하고, 참가자가 PIN·QR로 입장해 실시간으로 함께 풀며 AI 첨삭과 라이브 랭킹을 받는 학습 플랫폼입니다. 백엔드와 AWS 인프라 전체를 단독으로 맡고, Claude Code를 기획부터 배포까지 전 과정에 활용해 10일 만에 MVP를 완성했습니다.',
+      contributions: [
+        {
+          group: 'Backend',
+          items: [
+            'ERD 설계(34개 테이블) 및 도메인별 기능 구현',
+            'WebSocket(STOMP) 실시간 세션·랭킹 엔진 구현',
+            '세션 종료·첨삭 반영 시 점수·등수 확정 등 정합성 로직 설계',
+            'Claude API 문항 생성 파이프라인 — 응답 검증·실패 복구로 LLM 오류 흡수',
+            'PortOne 결제 연동, 코인 내역·호스트 평판(별점) 집계 구현',
+          ],
+        },
+        {
+          group: 'Infra',
+          items: [
+            'AWS EC2·RDS·S3 인프라 단독 구축',
+            'GitHub Actions CI/CD 구축 — 테스트→Docker 빌드→ECR→EC2 배포→Flyway 마이그레이션→헬스체크',
+          ],
+        },
+      ],
+      achievements: [
+        '최종 발표에서 40여 명 동시 접속 참여형 시연 성공 — 설계 기준(20명)의 2배 규모를 실사용으로 검증',
+        'Claude Code 기반 AI 주도 개발로 기획→배포 10일 완성',
+        'merge 즉시 배포되는 완전 자동화 CI/CD 파이프라인 구축',
+        'LLM 응답 검증·복구 설계로 안정적인 문항 생성 흐름 확보',
+      ],
+      retrospective: [
+        {
+          tag: 'AI 주도 개발',
+          body: 'Claude Code를 기획 문서 작성부터 설계·구현·배포 자동화까지 전 과정에 적용했습니다. AI에게 맡길 부분과 직접 검증할 부분을 구분하는 기준을 세우며, AI를 개발 도구로 다루는 저만의 워크플로우를 만들었습니다.',
+        },
+        {
+          tag: '실시간 정합성',
+          body: '미제출 참가자 0점 처리, 정답률 분모 통일처럼 실시간 세션의 엣지 케이스가 곧 사용자 경험이었습니다. 세션 종료·첨삭 반영 시점에 점수와 등수를 확정하는 규칙을 명시적으로 설계해 라이브 랭킹의 신뢰를 지켰습니다.',
+        },
+        {
+          tag: 'LLM의 불확실성',
+          body: '정답이 노출되거나 형식이 어긋난 AI 응답을 검증 단계에서 거부하고, 저장 실패 시 차감된 무료 생성 횟수를 복구하도록 만들었습니다. LLM의 불확실성을 서버가 흡수해야 서비스가 된다는 것을 배웠습니다.',
+        },
+        {
+          tag: '참여형 시연',
+          body: '최종 발표에서 강의실의 40여 명이 동시에 세션에 입장해 실시간으로 문제를 풀었습니다. 설계 기준의 두 배 규모에서도 끊김 없이 동작하는 것을 실사용으로 확인한, 가장 기억에 남는 순간입니다.',
+        },
+      ],
+    },
+  },
+  {
+    number: '02',
     name: '크라우드 펀딩 E-commerce 플랫폼',
     category: 'goorm PROFECT 2기',
     period: '2025.04 – 2025.06',
@@ -112,7 +188,7 @@ export const projects: Project[] = [
     },
   },
   {
-    number: '02',
+    number: '03',
     name: '재가요양 자동 인력 배정 플랫폼',
     category: '제7회 KDT 해커톤 · 최우수상',
     period: '2025.06 – 2025.09',
@@ -172,7 +248,7 @@ export const projects: Project[] = [
     },
   },
   {
-    number: '03',
+    number: '04',
     name: '주식 시장 트렌드 분석 대시보드',
     category: 'Data Engineering',
     period: '2024.12 – 2025.01',
@@ -239,7 +315,7 @@ export const projects: Project[] = [
     },
   },
   {
-    number: '04',
+    number: '05',
     name: 'AI 스피어피싱 메일 탐지',
     category: '대학 캡스톤',
     period: '2022.07 – 2023.02',

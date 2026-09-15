@@ -21,7 +21,7 @@ export default function AboutSection() {
 
       <AnimatedText
         text={profile.intro}
-        className="mx-auto max-w-[42ch] text-center font-medium leading-relaxed text-mist text-[clamp(1.05rem,1.5vw,1.3rem)]"
+        className="mx-auto max-w-4xl break-keep text-center font-medium leading-relaxed text-mist text-[clamp(1.05rem,1.5vw,1.3rem)]"
       />
 
       {/* 학력 · 수상 · 자격증 */}
