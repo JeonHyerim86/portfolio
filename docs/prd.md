@@ -83,7 +83,7 @@
 
 | # | 프로젝트 | 기간 | 핵심 성과 | 대표 기술 | 이미지 자산 |
 |---|----------|------|-----------|-----------|-------------|
-| 1 | **AI 실시간 문제풀이 플랫폼 PassMate** (청년취업사관학교 새싹 SeSAC) | 2026.08–2026.09 | 40여 명 동시 참여형 시연 성공, LLM 문항 생성 파이프라인, 기획→배포 **10일** 완성 (백엔드·AWS 인프라 단독) | Kotlin, Spring Boot, MySQL, WebSocket(STOMP), AWS, GitHub Actions, Claude API, Claude Code | `passmate-(home·editor·live·report·mobile).png` |
+| 1 | **AI 실시간 문제풀이 플랫폼 PassMate** (청년취업사관학교 새싹 SeSAC) | 2026.08–2026.09 | AI Agent 활용 능력, 40여 명 동시 참여형 시연 성공, LLM 문항 생성 파이프라인 (백엔드·AWS 인프라 단독) | Kotlin, Spring Boot, MySQL, WebSocket(STOMP), AWS, GitHub Actions, Claude API, Claude Code | `passmate-(home·editor·live·report·mobile).png` |
 | 2 | **크라우드 펀딩 E-commerce 플랫폼** (goorm PROFECT 2기) | 2025.04–2025.06 | 실시간 알림 초당 최대 요청 **250%↑**, CPU **12%↓**, **TPS 50%↑** | Java, Spring Boot, MySQL, QueryDSL, FCM, JMeter, GitHub Actions | `이커머스(1~4).png` |
 | 3 | **재가요양 자동 인력 배정 플랫폼** (제7회 KDT 해커톤 **최우수상**) | 2025.06–2025.09 | 현장 인터뷰 기반 설계로 심사 최우수상, 확장 가능한 ERD | Java, Spring Boot, PostgreSQL, Docker, GitHub Actions | `해커톤(1~3).png` |
 | 4 | **주식 시장 트렌드 분석 대시보드** | 2024.12–2025.01 | Airflow 기반 수집→정제→적재 자동화, 일 단위 키워드 리포트 | Python, Airflow, Docker, AWS(EC2·S3·Redshift), Superset | `de(1).jpg`, `de(2).png` |
@@ -94,11 +94,10 @@
 
 ### 6.3 자기소개 (About)
 - **개발 철학 / 소개문**: PDF 상단 소개 문단 활용("겉으로 보이는 기능보다 그 안에서 서비스를 단단하게 만드는 것 …").
-- **핵심 역량**(불릿, EXPERTISE 01~06 — 원티드 이력서 소개란 기준):
+- **핵심 역량**(불릿, EXPERTISE 01~05 — 원티드 이력서 소개란 기준):
   - 백엔드 성능 최적화 — 부하 테스트 검증 기반 개선 (처리량 250%↑ · CPU 12%↓ · TPS 50%↑)
-  - 백엔드 설계·구현 주도 — ERD 설계부터 핵심 서비스 구현까지 (34개 테이블 단독 설계·구현)
+  - 서비스 기획·문제 해결 — 현장 인터뷰 기반 요구사항 도출 → 확장 가능한 ERD·서비스 흐름 설계 → 구현, 해커톤 최우수상 2회
   - 인프라·배포 자동화 — AWS(EC2·RDS·S3) + GitHub Actions CI/CD 직접 구축
-  - 서비스 기획·문제 해결 — 현장 인터뷰 기반 요구사항 도출, 해커톤 최우수상 2회
   - AI 활용 개발 — Claude Code 기반 AI 주도 개발(기획→배포), Claude API LLM 기능 구현
   - 문서화·협업 — Swagger·Notion 문서화, 브랜치 전략·PR 리뷰
 - **스킬**: Java, Spring Boot, Python, MySQL, AWS, Docker, GitHub Actions, Git, RESTful API, Claude Code (시각적 배지/그룹핑).
