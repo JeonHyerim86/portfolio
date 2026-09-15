@@ -32,35 +32,44 @@ export default function AnimatedText({ text, className }: AnimatedTextProps) {
 
   if (reduce) {
     return (
-      <p ref={ref} className={className}>
+      <p ref={ref} className={className} style={{ whiteSpace: 'pre-line' }}>
         {text}
       </p>
     )
   }
 
-  const words = text.split(' ')
+  // text의 '\n'은 명시적 줄바꿈(<br />)으로 렌더한다.
+  const lines = text.split('\n')
   const total = text.length
   let cursor = 0
 
   return (
     <p ref={ref} className={className}>
-      {words.map((word, wi) => {
-        // 영문 토큰(예: Spring Boot)이 줄바꿈으로 쪼개지지 않도록 어절 단위로 묶는다.
-        const wordSpan = (
-          <span key={`w${wi}`} className="inline-block">
-            {word.split('').map((c, ci) => {
-              const start = cursor / total
-              const end = (cursor + 1) / total
-              cursor += 1
-              return <Char key={ci} char={c} range={[start, end]} progress={scrollYProgress} />
-            })}
-          </span>
-        )
-        cursor += 1 // 어절 사이 공백 몫
+      {lines.map((line, li) => {
+        const words = line.split(' ')
         return (
-          <span key={`seg${wi}`}>
-            {wordSpan}
-            {wi < words.length - 1 ? ' ' : ''}
+          <span key={`l${li}`}>
+            {words.map((word, wi) => {
+              // 영문 토큰(예: Spring Boot)이 줄바꿈으로 쪼개지지 않도록 어절 단위로 묶는다.
+              const wordSpan = (
+                <span key={`w${wi}`} className="inline-block">
+                  {word.split('').map((c, ci) => {
+                    const start = cursor / total
+                    const end = (cursor + 1) / total
+                    cursor += 1
+                    return <Char key={ci} char={c} range={[start, end]} progress={scrollYProgress} />
+                  })}
+                </span>
+              )
+              cursor += 1 // 어절 사이 공백(또는 줄바꿈) 몫
+              return (
+                <span key={`seg${wi}`}>
+                  {wordSpan}
+                  {wi < words.length - 1 ? ' ' : ''}
+                </span>
+              )
+            })}
+            {li < lines.length - 1 ? <br /> : null}
           </span>
         )
       })}
