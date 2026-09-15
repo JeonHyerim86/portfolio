@@ -64,7 +64,6 @@ public/                 # 이미지 (프로필 캐릭터 · 프로젝트 스크�
 |------|------|
 | [`docs/prd.md`](docs/prd.md) | 콘텐츠 SSOT — 문구 · 프로젝트 · 성과 · 연락처 · 이력 |
 | [`docs/design-ex.md`](docs/design-ex.md) | 디자인 SSOT — 레이아웃 · 애니메이션 · 컴포넌트 구조 |
-| [`CLAUDE.md`](CLAUDE.md) | 개발 · 수정 가이드 (AI 코딩 에이전트용) |
 
 
 ## 🌐 배포
